@@ -1,12 +1,14 @@
 ---
 title: 我的第一个个人博客
-tag: 博客
+date: 2017-02-15 18:05:22
+tags: hexo
+toc: true
 ---
 最近一直有个想搞个个人博客玩玩的想法，今天在网上看到一个静态博客框架Hexo，于是看教程学着搭建了一个，现在看起来很成功，哈哈！开启我的博客之旅吧！
 
-<div align=center>
-    ![gif](http://www.w3cplus.com/sites/default/files/blogs/2017/1702/understanding-flexbox-3.gif)
-</div>
+<div align="center">
+    <img src="http://www.w3cplus.com/sites/default/files/blogs/2017/1702/understanding-flexbox-3.gif" alt="图文">
+<div>
 
 <!-- more -->
 

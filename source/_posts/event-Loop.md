@@ -57,7 +57,7 @@ JavaScript语言的设计者意识到，这时主线程完全可以不管IO设�
 由此，JavaScript的运行机制可以简单理解为一个主线程和一个任务队列，脚本运行时先运行主线程，主线程运行完后，从”任务队列”中读取事件，运行任务队列的任务，这个过程是循环不断的，又称Event Loop（事件循环）。注意只要主线程的任务没有运行完，异步队列中的任务永远也无法运行，所以会导致浏览器出现假死的情况。我们可以看一下图解（转引自阮老师的[JavaScript 运行机制详解：再谈Event Loop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)）。
 
 <div align=center>
-![图解](http://www.ruanyifeng.com/blogimg/asset/2014/bg2014100802.png)
+    <img src="http://www.ruanyifeng.com/blogimg/asset/2014/bg2014100802.png" alt="图解">
 </div>
 
 ## 解决

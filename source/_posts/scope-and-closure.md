@@ -29,7 +29,10 @@ JavaScript的运行环境大概有三种：
 2. 检查当前执行环境中的函数声明，即function关键字的函数声明，在变量对象中以函数名建立一个属性，其值是指向该函数所在内存地址的引用。若函数名已经存在，则改属性将会被新的引用说覆盖。
 3. 检查当前执行环境中的变量声明，在变量对象以变量名建立一个属性，并初始化为undefined。
 
-![变量对象](https://github.com/huangzhuangjia/BlogImages/blob/master/img/img05.png?raw=true)
+<div align="center">
+    <img src="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img05.png?raw=true" alt="变量对象">
+</div>
+
 我们经常说到的变量提升，函数优先提升就是这样一个过程，在每个执行环境中的变量对象被创建的时候都会经历这几个步骤。
 而当某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的变量和函数定义也随之销毁，全局执行环境直到应用程序退出比如浏览器关闭时才会销毁。
 
@@ -112,7 +115,7 @@ result();
 ```
 
 <div align=center>
-    ![执行过程](https://github.com/huangzhuangjia/BlogImages/blob/master/img/img08.png?raw=true)
+    <img src="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img08.png?raw=true" alt="执行过程">
 </div>
 
 上图展示的是调用函数fun()的过程中产生的作用域链之间的关系。作用域链本质上就是一个指向变量对象的指针列表，它只引用但不实际包含变量对象。上面代码很明显，fun1()就是一个闭包，因为它的作用域链包含了外部函数fun()的活动对象，那为什么闭包在运行完之后不会被销毁呢？下面解释一下：

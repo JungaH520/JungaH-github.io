@@ -16,7 +16,7 @@ JavaScript中有两种不同数据类型的值，一种是原始值，另外一�
 
 我们看下下面Js的内存示意图：
 <div align=center>
- ![内存示意图](http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+  <img src="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存示意图">
 </div>
 
 ``` js
