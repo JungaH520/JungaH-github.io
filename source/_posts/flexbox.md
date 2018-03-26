@@ -15,7 +15,7 @@ flexbox布局意为弹性布局，是css3的弹性盒子模式，用它可以告
 先看下flexbox布局对各大浏览器的支持情况，基本也就告别低版本的浏览器了：
 
 <div align=center>
-  ![兼容性示意图](https://github.com/huangzhuangjia/BlogImages/blob/master/img/img04.jpeg?raw=true)
+  <img src="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img04.jpeg?raw=true" alt="兼容性示意图">
 </div>
 
 下面我们来简单了解一下flex布局的基本概念：
@@ -23,7 +23,7 @@ flexbox布局意为弹性布局，是css3的弹性盒子模式，用它可以告
 # flex项目排列方式：
 
 <div align=center>
-    ![示意图](http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox.png)
+ <img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox.png" alt="示意图">
 </div>
 
 * main axis:Flex容器的主轴主要用来配置Flex项目。注意，它不一定是水平，这主要取决于flex-direction属性。
@@ -121,7 +121,7 @@ flex-wrap定义了当一行或者一列排不上，flex项目是否换行，默�
 ```
 
 <div align=center>
-  ![示意图](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png)
+  <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png" alt="示意图">
 </div>
 
 * flex-start（默认值）：flex项目在主轴方向上进行左对齐
@@ -141,7 +141,7 @@ align-items定义了flex项目在flex容器竖轴上的对齐方式。类似just
 ```
 
 <div align=center>
-  ![示意图](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png)
+  <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png" alt="示意图">
 </div>
 
 * flex-start（默认值）：flex项目在flex容器竖轴方向起点对齐。
@@ -161,7 +161,7 @@ align-content属性定义了多根轴线的对齐方式。当伸缩容器的侧�
 ```
 
 <div align=center>
-  ![示意图](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png)
+  <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" alt="示意图">
 </div>
 
 * flex-start：与竖轴方向的起点对齐。
@@ -196,7 +196,7 @@ order属性定义项目的排列顺序。数值越小，排列越靠前，默认
  ```
 
  <div align=center>
-   ![示意图](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071014.png)
+  <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071014.png" alt="示意图">
  </div>
 
  如上图所示，若所有flex项目的flex-grow属性都为1，则flex容器中的flex项目尺寸都相等，若其中一个为2其他为1，则为其他flex项目的两倍。
@@ -257,7 +257,7 @@ align-self属性允许单个项目有与其他项目不一样的对齐方式，�
 ``` 
 
 <div align=center>
-  ![示意图](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071016.png)
+  <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071016.png" alt="示意图">
 </div>
 
 * flex-start:伸缩项目在侧轴起点边的外边距紧靠住该行在侧轴起始的边。
