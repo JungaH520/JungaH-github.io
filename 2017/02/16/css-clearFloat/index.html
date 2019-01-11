@@ -256,7 +256,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2017/02/16/css-clearFloat/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -295,6 +295,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/16/css-clearFloat/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/16/css-clearFloat/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -362,89 +372,7 @@ In a block formatting context, each box’s left outer edge touches the left edg
 <p>方法一：使用额外标签法，即使用带clear属性的空元素</p>
 <p>优点：简单，代码少，浏览器兼容性好。</p>
 <p>缺点：需要添加大量无语义的html元素，代码不够优雅，后期不容易维护。</p>
-<pre><code class="language-html">.box {
-  background-color: gray;
-  border: solid 1px black;
-  }
-
-.box img {
-  float: left;
-  }
-
-.box p {
-  float: right;
-  }
-
-.clear {
-  clear: both;
-  }
-
-&lt;div class=&quot;box&quot;&gt;
-    &lt;img src=&quot;news-pic.jpg&quot; /&gt;
-    &lt;p&gt;some text&lt;/p&gt;
-    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>方法二：利用CSS的overflow属性</p>
-<p>给浮动元素的容器添加overflow:hidden;或overflow:auto;可以清除浮动，另外在 IE6 中还需要触发 hasLayout ，例如为父元素设置容器宽高或设置 zoom:1。明显的缺点是当容器内部的内容过多时会被隐藏</p>
-<pre><code class="language-html">.box {
-  background-color: gray;
-  border: solid 1px black;
-  overflow: hidden;
-  *zoom: 1;
-  }
-
-.box img {
-  float: left;
-  }
-
-.box p {
-  float: right;
-  }
-
-&lt;div class=&quot;box&quot;&gt;
-    &lt;img src=&quot;news-pic.jpg&quot; /&gt;
-    &lt;p&gt;some text&lt;/p&gt;
-&lt;/div&gt;
-</code></pre>
-<p>方法三：给浮动的元素的容器添加浮动</p>
-<p>给浮动元素的容器也添加上浮动属性即可清除内部浮动，但是这样会使其整体浮动，影响布局，不推荐使用。</p>
-<p>方法四：给父元素定高</p>
-<p>父容器因为子元素浮动造成高度撑不开，可以给父元素定高度，缺点明显是当父容器高度固定了，不够灵活。</p>
-<p>方法五：使用css的:after伪元素（现在项目中清除浮动就是采用这种方法，兼容性跟友好性都比较好）</p>
-<p>after伪元素和zoom：1结合可以解决当前绝大多数浏览器浮动问题，zoom:1可以触发IE的hasLayout，具体实现代码如下：</p>
-<pre><code class="language-html">.box {
-  background-color: gray;
-  border: solid 1px black;
-  overflow: hidden;
-  *zoom: 1;
-  }
-
-.box img {
-  float: left;
-  }
-
-.box p {
-  float: right;
-  }
-
-.clearfix:after{
-  content: &quot;.&quot;; 
-  display: block; 
-  height: 0; 
-  clear: both; 
-  visibility: hidden;  
-  }
-
-.clearfix {
-  /* 触发 hasLayout */ 
-  zoom: 1;
-  }
-&lt;div class=&quot;box clearfix&quot;&gt;
-    &lt;img src=&quot;news-pic.jpg&quot; /&gt;
-    &lt;p&gt;some text&lt;/p&gt;
-&lt;/div&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  background-color: gray;</span><br><span class="line">  border: solid 1px black;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.box img &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.box p &#123;</span><br><span class="line">  float: right;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.clear &#123;</span><br><span class="line">  clear: both;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"news-pic.jpg"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>some text<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clear"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">方法二：利用CSS的overflow属性</span><br><span class="line"></span><br><span class="line">给浮动元素的容器添加overflow:hidden;或overflow:auto;可以清除浮动，另外在 IE6 中还需要触发 hasLayout ，例如为父元素设置容器宽高或设置 zoom:1。明显的缺点是当容器内部的内容过多时会被隐藏</span><br><span class="line"></span><br><span class="line">``` html</span><br><span class="line">.box &#123;</span><br><span class="line">  background-color: gray;</span><br><span class="line">  border: solid 1px black;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  *zoom: 1;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.box img &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.box p &#123;</span><br><span class="line">  float: right;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"news-pic.jpg"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>some text<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">方法三：给浮动的元素的容器添加浮动</span><br><span class="line"></span><br><span class="line">给浮动元素的容器也添加上浮动属性即可清除内部浮动，但是这样会使其整体浮动，影响布局，不推荐使用。</span><br><span class="line"></span><br><span class="line">方法四：给父元素定高</span><br><span class="line"></span><br><span class="line">父容器因为子元素浮动造成高度撑不开，可以给父元素定高度，缺点明显是当父容器高度固定了，不够灵活。</span><br><span class="line"></span><br><span class="line">方法五：使用css的:after伪元素（现在项目中清除浮动就是采用这种方法，兼容性跟友好性都比较好）</span><br><span class="line"></span><br><span class="line">after伪元素和zoom：1结合可以解决当前绝大多数浏览器浮动问题，zoom:1可以触发IE的hasLayout，具体实现代码如下：</span><br><span class="line"></span><br><span class="line">``` html</span><br><span class="line">.box &#123;</span><br><span class="line">  background-color: gray;</span><br><span class="line">  border: solid 1px black;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  *zoom: 1;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.box img &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.box p &#123;</span><br><span class="line">  float: right;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.clearfix:after&#123;</span><br><span class="line">  content: "."; </span><br><span class="line">  display: block; </span><br><span class="line">  height: 0; </span><br><span class="line">  clear: both; </span><br><span class="line">  visibility: hidden;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">.clearfix &#123;</span><br><span class="line">  /* 触发 hasLayout */ </span><br><span class="line">  zoom: 1;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box clearfix"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"news-pic.jpg"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>some text<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
 <p>通过上面的例子，清除浮动的方法可以分成两类：<br>
 一是利用 clear 属性，包括在浮动元素末尾添加一个带有 clear: both 属性的空 div 来闭合元素，其实利用 :after 伪元素的方法也是在元素末尾添加一个内容为一个点并带有 clear: both 属性的元素实现的。<br>
@@ -469,14 +397,14 @@ In a block formatting context, each box’s left outer edge touches the left edg
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -489,6 +417,24 @@ In a block formatting context, each box’s left outer edge touches the left edg
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2017/02/16/css-clearFloat/" title="CSS之清除浮动">https://huangzhuangjia.github.io/2017/02/16/css-clearFloat/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -550,6 +496,16 @@ In a block formatting context, each box’s left outer edge touches the left edg
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -586,9 +542,9 @@ In a block formatting context, each box’s left outer edge touches the left edg
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -691,7 +647,7 @@ In a block formatting context, each box’s left outer edge touches the left edg
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -823,6 +779,26 @@ In a block formatting context, each box’s left outer edge touches the left edg
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2017/02/16/css-clearFloat/';
+          this.page.identifier = '2017/02/16/css-clearFloat/';
+          this.page.title = 'CSS之清除浮动';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -835,10 +811,6 @@ In a block formatting context, each box’s left outer edge touches the left edg
   
 
 
-
-
-
-  
 
 
 

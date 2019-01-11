@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img06.png?raw=true">
 <meta property="og:image" content="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img07.png?raw=true">
 <meta property="og:image" content="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img08.png?raw=true">
-<meta property="og:updated_time" content="2019-01-11T03:51:42.580Z">
+<meta property="og:updated_time" content="2019-01-11T09:28:59.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="作用域与闭包的一二事">
 <meta name="twitter:description" content="闭包是JavaScript语言的一大特点，可以说再开发的过程中，它无处不在，即使有时候我们都没有发现它的存在。接触JavaScript以来，虽然说是一直有对闭包了解，但是实际应用起来或者分析一些代码的时候却有些吃力。现在回过头总结，才又进一步的揭开了闭包的一层面纱。而在讲闭包之前，我们要先明白JavaScript中又一个重要的知识，那就是JavaScript的内存机制以及作用域，这两个是我们有效理">
@@ -261,7 +261,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2017/03/05/scope-and-closure/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -300,6 +300,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/05/scope-and-closure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/05/scope-and-closure/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -353,12 +363,9 @@
 <p>JavaScript代码的整个执行过程分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器执行完成，将代码编译成可执行代码，并确立作用域的规则。执行阶段由引擎完成，主要是执行可执行代码，执行上下文在这个阶段创建。</p>
 <p><img src="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img06.png?raw=true" alt="执行过程"></p>
 <p>我们举一个简单粗暴的🌰解释一下引擎、编译器和作用域是如何协同工作的就明白了：</p>
-<pre><code class="language-js">var a = 10;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
 <p>JavaScript执行上面代码的时候会将其看成是两个声明，一个是编译阶段的定义声明，一个是引擎执行阶段的赋值声明，所以我们可以分解成：</p>
-<pre><code class="language-js">var a;
-a=10;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line">a=<span class="number">10</span>;</span><br></pre></td></tr></table></figure>
 <ol>
 <li>编译阶段：“编译器&quot;会询问&quot;作用域”：当前的作用域中是否已经有变量a，如果有，那么&quot;编译器&quot;会忽略这个声明，继续进行编译；如果没有，那么它会要求“作用域”在当前的作用域声明一个新的变量，并命名为a;</li>
 <li>执行阶段：“引擎&quot;处理a = 10时，首先会询问&quot;作用域”：当前的作用域中是否存在一个a的变量，如果存在，那么引擎就会使用这个变量，如果否，那么&quot;引擎&quot;会继续查找该变量。如果&quot;引擎&quot;最终找到了a变量，那么就将10赋值给它，否则&quot;引擎&quot;就会抛出一个异常。</li>
@@ -396,17 +403,7 @@ a=10;
 <p>从以上定义我们可以总结，我们可以简单理解就是一个函数被一个外部函数所包含，根据上面我们讲到的作用域链只是我们可以知道，当前被包含的函数内部（即当前的执行环境）是有权访问它外部函数（外部的执行环境）的变量对象的，那么这个函数就是我们所说的闭包了。原来对闭包的理解就是这么的通畅，哈哈😆。</p>
 <h2 id="闭包的用途"><a class="header-anchor" href="#闭包的用途"></a>闭包的用途</h2>
 <p>我们都知道，当函数执行完毕的时候，局部的活动对象就会退出执行栈，随后就会被销毁，但是闭包则不是酱紫的。废话不多说，我们再来看一个🌰（图画的有点丑，将就着看吧哈哈）</p>
-<pre><code class="language-js">function fun(){
-    var name = &quot;Junga&quot;
-    function fun1(){
-        var greet = 'Hello '+ name;
-        console.log(greet);
-    }
-    return fun1;
-}
-var result = fun();
-result();
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"Junga"</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fun1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> greet = <span class="string">'Hello '</span>+ name;</span><br><span class="line">        <span class="built_in">console</span>.log(greet);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fun1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> result = fun();</span><br><span class="line">result();</span><br></pre></td></tr></table></figure>
 <div align="center">
     <img src="https://github.com/huangzhuangjia/BlogImages/blob/master/img/img08.png?raw=true" alt="执行过程">
 </div>
@@ -436,14 +433,14 @@ result();
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -456,6 +453,24 @@ result();
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2017/03/05/scope-and-closure/" title="作用域与闭包的一二事">https://huangzhuangjia.github.io/2017/03/05/scope-and-closure/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -517,6 +532,16 @@ result();
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -553,9 +578,9 @@ result();
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -658,7 +683,7 @@ result();
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -790,6 +815,26 @@ result();
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2017/03/05/scope-and-closure/';
+          this.page.identifier = '2017/03/05/scope-and-closure/';
+          this.page.title = '作用域与闭包的一二事';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -802,10 +847,6 @@ result();
   
 
 
-
-
-
-  
 
 
 

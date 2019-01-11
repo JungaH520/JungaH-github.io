@@ -88,7 +88,7 @@
 <meta property="og:description" content="一直以来，对于Js的内存空间这部分的知识概念有些模糊，最近在回顾一些知识点的时候，特地的对js的内存这部分知识加深了一下理解，比如基本类型数据和引用类型数据在js内存中是怎么回事？什么是按值传递和按引用传递？以及对作用域和闭包的理解等等。 JavaScript的内存是怎样的？ JavaScript中有两种不同数据类型的值，一种是原始值，另外一种是引用类型值，原始值就是常说的基本数据类型值，包括St">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-11T03:51:42.579Z">
+<meta property="og:updated_time" content="2019-01-11T09:32:09.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript的内存问题">
 <meta name="twitter:description" content="一直以来，对于Js的内存空间这部分的知识概念有些模糊，最近在回顾一些知识点的时候，特地的对js的内存这部分知识加深了一下理解，比如基本类型数据和引用类型数据在js内存中是怎么回事？什么是按值传递和按引用传递？以及对作用域和闭包的理解等等。 JavaScript的内存是怎样的？ JavaScript中有两种不同数据类型的值，一种是原始值，另外一种是引用类型值，原始值就是常说的基本数据类型值，包括St">
@@ -258,7 +258,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2017/02/21/javascript-memory/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -298,6 +298,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/21/javascript-memory/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/21/javascript-memory/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -333,110 +343,19 @@
 <div align="center">
   <img src="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存示意图">
 </div>
-<pre><code class="language-js">    var a = 20;
-    var b = 'abc';
-    var c = true;
-    var d = { m: 20 }
-</code></pre>
-<p>可以看出变量a,b,c属于原始数据类型的变量，它们的值都存放在栈内存中，而d是一个对象即属于引用值，栈内存中存放的是它的内存地址，指向堆内存里面具体的一个值。</p>
-<p>接着我们来看下面的一段代码：</p>
-<pre><code class="language-js">    var a = {n:1};
-    var b = a;
-    a.x = a = {n:2};
-    console.log(a.x);// --&gt; undefined
-    console.log(b.x);// --&gt; [object Object]
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> a = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="string">'abc'</span>;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">var</span> d = &#123; <span class="attr">m</span>: <span class="number">20</span> &#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">可以看出变量a,b,c属于原始数据类型的变量，它们的值都存放在栈内存中，而d是一个对象即属于引用值，栈内存中存放的是它的内存地址，指向堆内存里面具体的一个值。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">接着我们来看下面的一段代码：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">    <span class="keyword">var</span> a = &#123;<span class="attr">n</span>:<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">var</span> b = a;</span><br><span class="line">    a.x = a = &#123;<span class="attr">n</span>:<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="built_in">console</span>.log(a.x);<span class="comment">// --&gt; undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(b.x);<span class="comment">// --&gt; [object Object]</span></span><br></pre></td></tr></table></figure>
 <p>一开始看这道题，然后看答案，一脸懵逼啊有木有？？？为啥结果输出的是undefined和[object Object]？？？</p>
 <p>了解了Js的变量在内存的存储形式之后，我们一起来解释一下：<br>
 1、a是一个引用类型的变量，一开始它在栈内存中的地址是指向堆内存的具体内容{n:1}，接着赋值给b，所以b和a一样，此时都指向对象{n:1}；</p>
-<pre><code class="language-js">  var a = {n:1} ;
-  var b = {n:1} ;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">n</span>:<span class="number">1</span>&#125; ;</span><br><span class="line"><span class="keyword">var</span> b = &#123;<span class="attr">n</span>:<span class="number">1</span>&#125; ;</span><br></pre></td></tr></table></figure>
 <p>2、接下来a.x = a = {n:2},我们都知道js的赋值运算是从右往左的，但“.”是优先级最高的运算符，所以这段代码先执行了a.x,所以此时对象{n:1}新增加了一个x的属性，并且值是undefined，所以运行到这里a和b都指向了对象{n:1,x:undefined}；</p>
-<pre><code class="language-js">  var a = {n:1，x:undefined} ;
-  var b = {n:1，x:undefined} ;
-</code></pre>
-<p>3、接着，依循“从右往左”的赋值运算顺序先执行 a={n:2} ，这时候，a指向的对象发生了改变，变成了新对象{n:2};而a.x = a则是对象{n:1，x:undefined}中的属性x指向了对象{n:2}，所以此时指向的对象变成了{n:1,x:{n:2}}。</p>
-<pre><code class="language-js">  var a = {n:2} ;
-  var b = {n:1，x:{n:2}} ;
-</code></pre>
-<p>综上所述，我们可以看到最后的运行结果，显然a.x是undefined，b.x是对象{n:2},用对象的字符串形式[object Object]表示。</p>
-<h2 id="js的内存空间管理"><a class="header-anchor" href="#js的内存空间管理"></a>Js的内存空间管理</h2>
-<p>JavaScript的内存分配和回收是自动完成的，满足一定条件，就会被垃圾回收器自动回收，下面我们简单的了解下js的内存管理机制。</p>
-<h3 id="javascript的内存生命周期"><a class="header-anchor" href="#javascript的内存生命周期"></a>JavaScript的内存生命周期:</h3>
-<ol>
-<li>分配你所需要的内存</li>
-<li>使用分配到的内存（读、写）</li>
-<li>不需要时将其释放、归还</li>
-</ol>
-<pre><code class="language-js">  var num = 10;  // 在内存中给数值变量分配空间
-  alert(num);  // 使用内存
-  num = null; // 使用完毕之后，释放内存空间
-
-  var obj = {v:1}; // 内存中存在{v:1}对象，及obj这个引用地址
-  obj = {value:2}; // 垃圾回收机制自动清理{v:1}，并为新的有用到的{value:2}分配空间
-</code></pre>
-<h3 id="垃圾回收算法"><a class="header-anchor" href="#垃圾回收算法"></a>垃圾回收算法</h3>
-<p>js垃圾回收有两种常见的算法：引用计数和标记清除。</p>
-<h4 id="引用计数"><a class="header-anchor" href="#引用计数"></a>引用计数</h4>
-<p>引用计数就是跟踪对象被引用的次数，当一个对象的引用计数为0即没有其他对象引用它时，说明该对象已经无需访问了，因此就会回收其所占的内存，这样，当垃圾回收器下次运行就会释放引用数为0的对象所占用的内存。</p>
-<blockquote>
-<p>但引用计数存在一个弊端就是循环引用问题（IE6和IE7就是采用此算法）。循环引用就是指对象A中包含一个指向对象B的引用，而对象B中也包含一个指向对象的引用。</p>
-</blockquote>
-<pre><code class="language-js"> function problem() {
-    var A = {};
-    var B = {};
-    A.a = B;
-    B.a = A;
-}
-</code></pre>
-<p>上面例子可以看出对象A和B存在循环音引用的问题，即两个的引用次数均为2，它们在运行之后依然存在，并且引用次数永远不为0，如果这个函数被多次调用，就有可能引起内存泄漏问题。为了解决循环引用的问题，还有一种方法就是可以实现垃圾回收，那就是标记清除法。</p>
-<h4 id="标记清除"><a class="header-anchor" href="#标记清除"></a>标记清除</h4>
-<p>标记清除法是现代浏览器常用的一种垃圾收集方式，当变量进入环境（即在一个函数中声明一个变量）时，就将此变量标记为“进入环境”，进入环境的变量是不能被释放，因为只有执行流进入相应的环境，就可能会引用它们。而当变量离开环境时，就标记为“离开环境”。</p>
-<p>垃圾收集器在运行时会给储存在内存中的所有变量加上标记，然后会去掉环境中的变量以及被环境中的变量引用的变量的标记，当执行完毕那些没有存在引用无法访问的变量就被加上标记，最后垃圾收集器完成清除工作，释放掉那些打上标记的变量所占的内存。</p>
-<blockquote>
-<p>标记清除之所以不存在循环引用的问题，是因为当函数执行完毕之后，对象A和B就已经离开了所在的作用域，此时两个变量被标记为“离开环境”，等待被垃圾收集器回收，最后释放其内存。</p>
-</blockquote>
-<h3 id="管理内存"><a class="header-anchor" href="#管理内存"></a>管理内存</h3>
-<p>使用具备垃圾收集机制的语言编写程序，开发人员一般都不必担心内存管理的问题。但JavaScript在进行内存管理以及垃圾收集时面临的问题还是有些不同。出于安全方面的考虑，系统分配给浏览器的可用内存数量通常要比分配给桌面应用程序的少，防止JavaScript的网页耗尽全部系统内存而导致系统崩溃。内存限制问题不仅会影响给变量分配内存，同时还会影响调用栈以及在一个线程中能够同时执行的语句数量。<br>
-因此为了确保占用最少的内存可以让页面获取更好的性能。优化内存占用的最佳方式就是为执行中的代码只保存必要的数据。一旦数据不再有用，最好通过将其值设置为null来释放其引用，即解除引用。这一做法适用于大多全局变量和全局对象的属性。局部变量会在它们离开执行环境时自动被解除引用。（具体请阅读《JavaScript高级程序设计》第四章）</p>
-<p>可以分析以下代码：</p>
-<pre><code class="language-js">    function createPerson(name){
-        var localPerson = new Object();
-        localPerson.name = name;
-        return localPerson;
-    }
-    var globalPerson = createPerson(&quot;Junga&quot;);
-    globalPerson = null;//手动解除全局变量的引用
-</code></pre>
-<p>在这个🌰中，变量globalPerson取得了createPerson()函数的返回的值。在createPerson()的内部创建了一个局部变量localPerson并添加了一个name属性。由于localPerson在函数执行完毕之后就离开执行环境，因此会自动解除引用，而对于全局变量来说则需要我们手动设置null，解除引用。</p>
-<blockquote>
-<p>不过，解除一个值的引用并不意味着自动回收该值所占用的内存，解除引用真正的作用是让值脱离执行环境，以便垃圾收集器下次运行时将其收回。</p>
-</blockquote>
-<h2 id="内存优化"><a class="header-anchor" href="#内存优化"></a>内存优化</h2>
-<blockquote>
-<p>对于全局变量，JavaScript不能确定它在后面不能够被用到，所以它会从声明之后就一直存在于内存中，直至手动释放或者关闭页面/浏览器，这就导致了某些不必要的内存消耗。我们可以进行以下的优化:</p>
-</blockquote>
-<h3 id="立即执行函数的运用"><a class="header-anchor" href="#立即执行函数的运用"></a>立即执行函数的运用</h3>
-<pre><code class="language-js">  ;(function(window, $, undefined) {
-      // 主业务代码
-   })(window, jQuery);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">var</span> a = &#123;<span class="attr">n</span>:<span class="number">1</span>，x:<span class="literal">undefined</span>&#125; ;</span><br><span class="line">  <span class="keyword">var</span> b = &#123;<span class="attr">n</span>:<span class="number">1</span>，x:<span class="literal">undefined</span>&#125; ;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">3、接着，依循“从右往左”的赋值运算顺序先执行 a=&#123;n:2&#125; ，这时候，a指向的对象发生了改变，变成了新对象&#123;n:2&#125;;而a.x = a则是对象&#123;n:1，x:undefined&#125;中的属性x指向了对象&#123;n:2&#125;，所以此时指向的对象变成了&#123;n:1,x:&#123;n:2&#125;&#125;。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">  <span class="keyword">var</span> a = &#123;<span class="attr">n</span>:<span class="number">2</span>&#125; ;</span><br><span class="line">  <span class="keyword">var</span> b = &#123;<span class="attr">n</span>:<span class="number">1</span>，x:&#123;<span class="attr">n</span>:<span class="number">2</span>&#125;&#125; ;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">综上所述，我们可以看到最后的运行结果，显然a.x是undefined，b.x是对象&#123;n:2&#125;,用对象的字符串形式[object Object]表示。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Js的内存空间管理</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">JavaScript的内存分配和回收是自动完成的，满足一定条件，就会被垃圾回收器自动回收，下面我们简单的了解下js的内存管理机制。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### JavaScript的内存生命周期:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">1. 分配你所需要的内存</span></span><br><span class="line"><span class="string">2. 使用分配到的内存（读、写）</span></span><br><span class="line"><span class="string">3. 不需要时将其释放、归还</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">  <span class="keyword">var</span> num = <span class="number">10</span>;  <span class="comment">// 在内存中给数值变量分配空间</span></span><br><span class="line">  alert(num);  <span class="comment">// 使用内存</span></span><br><span class="line">  num = <span class="literal">null</span>; <span class="comment">// 使用完毕之后，释放内存空间</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> obj = &#123;<span class="attr">v</span>:<span class="number">1</span>&#125;; <span class="comment">// 内存中存在&#123;v:1&#125;对象，及obj这个引用地址</span></span><br><span class="line">  obj = &#123;<span class="attr">value</span>:<span class="number">2</span>&#125;; <span class="comment">// 垃圾回收机制自动清理&#123;v:1&#125;，并为新的有用到的&#123;value:2&#125;分配空间</span></span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 垃圾回收算法</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">js垃圾回收有两种常见的算法：引用计数和标记清除。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#### 引用计数</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">引用计数就是跟踪对象被引用的次数，当一个对象的引用计数为0即没有其他对象引用它时，说明该对象已经无需访问了，因此就会回收其所占的内存，这样，当垃圾回收器下次运行就会释放引用数为0的对象所占用的内存。  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt; 但引用计数存在一个弊端就是循环引用问题（IE6和IE7就是采用此算法）。循环引用就是指对象A中包含一个指向对象B的引用，而对象B中也包含一个指向对象的引用。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">problem</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> A = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> B = &#123;&#125;;</span><br><span class="line">    A.a = B;</span><br><span class="line">    B.a = A;</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">上面例子可以看出对象A和B存在循环音引用的问题，即两个的引用次数均为2，它们在运行之后依然存在，并且引用次数永远不为0，如果这个函数被多次调用，就有可能引起内存泄漏问题。为了解决循环引用的问题，还有一种方法就是可以实现垃圾回收，那就是标记清除法。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#### 标记清除</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">标记清除法是现代浏览器常用的一种垃圾收集方式，当变量进入环境（即在一个函数中声明一个变量）时，就将此变量标记为“进入环境”，进入环境的变量是不能被释放，因为只有执行流进入相应的环境，就可能会引用它们。而当变量离开环境时，就标记为“离开环境”。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">垃圾收集器在运行时会给储存在内存中的所有变量加上标记，然后会去掉环境中的变量以及被环境中的变量引用的变量的标记，当执行完毕那些没有存在引用无法访问的变量就被加上标记，最后垃圾收集器完成清除工作，释放掉那些打上标记的变量所占的内存。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt; 标记清除之所以不存在循环引用的问题，是因为当函数执行完毕之后，对象A和B就已经离开了所在的作用域，此时两个变量被标记为“离开环境”，等待被垃圾收集器回收，最后释放其内存。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 管理内存</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用具备垃圾收集机制的语言编写程序，开发人员一般都不必担心内存管理的问题。但JavaScript在进行内存管理以及垃圾收集时面临的问题还是有些不同。出于安全方面的考虑，系统分配给浏览器的可用内存数量通常要比分配给桌面应用程序的少，防止JavaScript的网页耗尽全部系统内存而导致系统崩溃。内存限制问题不仅会影响给变量分配内存，同时还会影响调用栈以及在一个线程中能够同时执行的语句数量。  </span></span><br><span class="line"><span class="string">因此为了确保占用最少的内存可以让页面获取更好的性能。优化内存占用的最佳方式就是为执行中的代码只保存必要的数据。一旦数据不再有用，最好通过将其值设置为null来释放其引用，即解除引用。这一做法适用于大多全局变量和全局对象的属性。局部变量会在它们离开执行环境时自动被解除引用。（具体请阅读《JavaScript高级程序设计》第四章）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">可以分析以下代码：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> localPerson = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">        localPerson.name = name;</span><br><span class="line">        <span class="keyword">return</span> localPerson;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> globalPerson = createPerson(<span class="string">"Junga"</span>);</span><br><span class="line">    globalPerson = <span class="literal">null</span>;<span class="comment">//手动解除全局变量的引用</span></span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">在这个🌰中，变量globalPerson取得了createPerson()函数的返回的值。在createPerson()的内部创建了一个局部变量localPerson并添加了一个name属性。由于localPerson在函数执行完毕之后就离开执行环境，因此会自动解除引用，而对于全局变量来说则需要我们手动设置null，解除引用。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt; 不过，解除一个值的引用并不意味着自动回收该值所占用的内存，解除引用真正的作用是让值脱离执行环境，以便垃圾收集器下次运行时将其收回。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## 内存优化</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt; 对于全局变量，JavaScript不能确定它在后面不能够被用到，所以它会从声明之后就一直存在于内存中，直至手动释放或者关闭页面/浏览器，这就导致了某些不必要的内存消耗。我们可以进行以下的优化:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 立即执行函数的运用</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">  ;(<span class="function"><span class="keyword">function</span>(<span class="params">window, $, undefined</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 主业务代码</span></span><br><span class="line">   &#125;)(<span class="built_in">window</span>, jQuery);</span><br></pre></td></tr></table></figure>
 <p>立即执行函数的作用就是建立一个独立的作用域，其一是为了防止全局污染，同时也可以防止过多的定义全局变量造成的内存回收问题。如果你的某些变量真的需要一直存在可以通过上面的方法挂载在window下。同样，你也可以传入jQuery进行使用。</p>
 <h3 id="手动解除变量的引用"><a class="header-anchor" href="#手动解除变量的引用"></a>手动解除变量的引用</h3>
-<pre><code class="language-js">  var obj = {a:1,b:2,c:3};
-  obj = null;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">2</span>,<span class="attr">c</span>:<span class="number">3</span>&#125;;</span><br><span class="line">obj = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 <h3 id="使用回调"><a class="header-anchor" href="#使用回调"></a>使用回调</h3>
 <p>除了使用闭包进行内部变量访问，回调函数也有这个功能。</p>
-<pre><code class="language-js">  function getData(callback) {
-    var data = 'Junga';
-    callback(data);
-  }
-  getData(function(data) {
-    console.log(data);
-  });
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> data = <span class="string">'Junga'</span>;</span><br><span class="line">  callback(data);</span><br><span class="line">&#125;</span><br><span class="line">getData(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>回调函数是一种后续传递风格(Continuation Passing Style, CPS)的技术，这种风格的程序编写将函数的业务重点从返回值转移到回调函数中去。而且其相比闭包的好处也不少：</p>
 <ol>
 <li>如果传入的参数是基础类型（如字符串、数值），回调函数中传入的形参就会是复制值，业务代码使用完毕以后，更容易被回收；</li>
@@ -463,14 +382,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -483,6 +402,24 @@
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2017/02/21/javascript-memory/" title="JavaScript的内存问题">https://huangzhuangjia.github.io/2017/02/21/javascript-memory/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -544,6 +481,16 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -580,9 +527,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -661,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">JavaScript的内存是怎样的？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#js的内存空间管理"><span class="nav-number">1.1.</span> <span class="nav-text">Js的内存空间管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript的内存生命周期"><span class="nav-number">1.1.1.</span> <span class="nav-text">JavaScript的内存生命周期:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用计数"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标记清除"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">标记清除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理内存"><span class="nav-number">1.1.3.</span> <span class="nav-text">管理内存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存优化"><span class="nav-number">1.2.</span> <span class="nav-text">内存优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#立即执行函数的运用"><span class="nav-number">1.2.1.</span> <span class="nav-text">立即执行函数的运用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动解除变量的引用"><span class="nav-number">1.2.2.</span> <span class="nav-text">手动解除变量的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用回调"><span class="nav-number">1.2.3.</span> <span class="nav-text">使用回调</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">JavaScript的内存是怎样的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手动解除变量的引用"><span class="nav-number">1.0.1.</span> <span class="nav-text">手动解除变量的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用回调"><span class="nav-number">1.0.2.</span> <span class="nav-text">使用回调</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -685,7 +632,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -817,6 +764,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2017/02/21/javascript-memory/';
+          this.page.identifier = '2017/02/21/javascript-memory/';
+          this.page.title = 'JavaScript的内存问题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -829,10 +796,6 @@
   
 
 
-
-
-
-  
 
 
 

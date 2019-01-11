@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Junga&#39;s Blog">
 <meta property="og:description" content="三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就搞事情">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-11T03:51:42.580Z">
+<meta property="og:updated_time" content="2019-01-11T09:32:31.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于移动端开发中遇到的坑">
 <meta name="twitter:description" content="三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就搞事情">
@@ -256,7 +256,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -296,6 +296,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/30/something-about-web-app/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/07/30/something-about-web-app/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -326,57 +336,23 @@
 <h1>滚动穿透问题</h1>
 <p>滚动穿透是指在移动端当有 fixed 遮罩背景和弹出层时，在屏幕上滑动能够滑动背景下面的内容。网上整理了解决方案，但有些还是存在一定的问题：</p>
 <h2 id="设置overflow为hidden"><a class="header-anchor" href="#设置overflow为hidden"></a>设置overflow为hidden</h2>
-<pre><code class="language-css">.modal-open {
-    &amp;, body {
-        overflow: hidden;
-        height: 100%
-    }
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.modal-open</span> &#123;</span><br><span class="line">    &amp;, body &#123;</span><br><span class="line">        <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">        <span class="selector-tag">height</span>: 100%</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>即当弹出层弹出时在html上添加.modal-open,禁用 html 和 body 的滚动条,但实际用上就会发现：</p>
 <ol>
 <li>由于 html 和 body的滚动条都被禁用，弹出层后页面的滚动位置会丢失，需要用 js 来计算原来滚动的位置，在弹出时保持滚动位置；</li>
 <li>杯具(＞﹏＜)的是页面的背景还是能够有滚的动的效果</li>
 </ol>
 <h2 id="js-之-touchmove-preventdefault"><a class="header-anchor" href="#js-之-touchmove-preventdefault"></a>js 之 touchmove + preventDefault</h2>
-<pre><code class="language-js">modal.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-}, false);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modal.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>即通过阻止移动端touchmove事件，但实际用上会发现弹出层需要滚动时也会被阻止(＞﹏＜)</p>
 <h2 id="最后解决方案：position-fixed"><a class="header-anchor" href="#最后解决方案：position-fixed"></a>最后解决方案：position: fixed</h2>
-<pre><code class="language-css">body.modal-open {
-    position: fixed;
-    width: 100%;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span><span class="selector-class">.modal-open</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种方式同样当弹出层弹出时滚动条会丢失，所以还需要使用js来保存滚动条的位置，在关闭弹出层时将滚动位置还原；</p>
-<pre><code class="language-js">var ModalHelper = (function(bodyCls) {
-  var scrollTop; // 在闭包中定义一个用来保存滚动位置的变量
-  return {
-    afterOpen: function() { //弹出之后记录保存滚动位置，并且给body添加.modal-open
-      scrollTop = document.scrollingElement.scrollTop;
-      document.body.classList.add(bodyCls);
-      document.body.style.top = -scrollTop + 'px';
-    },
-    beforeClose: function() { //关闭时将.modal-open移除并还原之前保存滚动位置
-      document.body.classList.remove(bodyCls);
-      document.scrollingElement.scrollTop = scrollTop;
-    }
-  };
-})('modal-open');
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ModalHelper = (<span class="function"><span class="keyword">function</span>(<span class="params">bodyCls</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scrollTop; <span class="comment">// 在闭包中定义一个用来保存滚动位置的变量</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    afterOpen: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//弹出之后记录保存滚动位置，并且给body添加.modal-open</span></span><br><span class="line">      scrollTop = <span class="built_in">document</span>.scrollingElement.scrollTop;</span><br><span class="line">      <span class="built_in">document</span>.body.classList.add(bodyCls);</span><br><span class="line">      <span class="built_in">document</span>.body.style.top = -scrollTop + <span class="string">'px'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    beforeClose: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//关闭时将.modal-open移除并还原之前保存滚动位置</span></span><br><span class="line">      <span class="built_in">document</span>.body.classList.remove(bodyCls);</span><br><span class="line">      <span class="built_in">document</span>.scrollingElement.scrollTop = scrollTop;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)(<span class="string">'modal-open'</span>);</span><br></pre></td></tr></table></figure>
 <p>本人亲测确实比较完美解决了移动端滚动问题😊</p>
 <h1>移动端输入框被键盘挡住问题</h1>
 <p>由于所开发的页面内嵌在公司的一个APP中，有一个类似聊天窗口的界面，测试的时候发现在部分安卓机中输入框被完全遮挡住，踩这个坑时在网上找了好多资料，好像都没有一套完整的解决办法，先看其中一种解决办法，可以解决绝大数安卓机上面的问题：</p>
-<pre><code class="language-js">if(/Android/.test(navigator.appVersion)) {
-   window.addEventListener(&quot;resize&quot;, function() {
-     if(document.activeElement.tagName==&quot;INPUT&quot; || document.activeElement.tagName==&quot;TEXTAREA&quot;) {
-       document.activeElement.scrollIntoView();
-     }
-  })
-}
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="regexp">/Android/</span>.test(navigator.appVersion)) &#123;</span><br><span class="line">   <span class="built_in">window</span>.addEventListener(<span class="string">"resize"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(<span class="built_in">document</span>.activeElement.tagName==<span class="string">"INPUT"</span> || <span class="built_in">document</span>.activeElement.tagName==<span class="string">"TEXTAREA"</span>) &#123;</span><br><span class="line">       <span class="built_in">document</span>.activeElement.scrollIntoView();</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>即在安卓机中通过监听当窗口resize时，判断当前获得焦点的元素是否为输入框，再调用该元素的scrollIntoView()，即将该元素展示在当前窗口的可视区域。由于只有scrollIntoView被各浏览器均支持，所以这个方法最为常用。<br>
 使用这段代码之后，在微信或者其他浏览器测试时有效果，但因为是需要内嵌在自家APP上，使用这段代码一直没有解决输入框被挡住的问题，最后测试才发现，APP内置浏览器在聚焦输入框弹出键盘根本没有触发窗口的resize事件，瞬间心中万马奔腾(＞﹏＜)~~~，后面在借鉴了某阿里的一个网页版的聊天界面，发现它是通过获取输入框焦点将输入框定位到窗口略高于输入框的位置，在失去焦点键盘弹回时再恢复到底部，于是通过这种方式处理，暂时比较暴力的解决了在安卓上该APP上输入框被挡住的问题，这种方法显然是不完美的，比如由于无法监听resize事件，而且使用的键盘高度不固定，所以只能大概的将高度设置保持在屏幕一半偏上一点。保证绝大数情况下输入框在键盘之上显示。</p>
 <h1>IOS滚动不平滑的问题</h1>
@@ -413,14 +389,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -433,6 +409,24 @@
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/" title="关于移动端开发中遇到的坑">https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -494,6 +488,16 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -530,9 +534,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -635,7 +639,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -767,6 +771,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/';
+          this.page.identifier = '2017/07/30/something-about-web-app/';
+          this.page.title = '关于移动端开发中遇到的坑';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -779,10 +803,6 @@
   
 
 
-
-
-
-  
 
 
 

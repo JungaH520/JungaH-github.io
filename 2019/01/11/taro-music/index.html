@@ -258,7 +258,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2019/01/11/taro-music/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -298,6 +298,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/11/taro-music/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/11/taro-music/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -330,24 +340,11 @@
 <blockquote>
 <p>本项目已经使用了线上api接口，所以无需运行后台也可以获取数据，当然你也可以在本地运行 <a href="https://binaryify.github.io/NeteaseCloudMusicApi/#/" target="_blank" rel="noopener">NeteaseCloudMusicApi</a> 项目，开启获取歌曲服务，默认端口是3000</p>
 </blockquote>
-<pre><code class="language-bash">$ git clone git@github.com:Binaryify/NeteaseCloudMusicApi.git
-$ cd NeteaseCloudMusicApi &amp;&amp; npm install
-$ npm start
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:Binaryify/NeteaseCloudMusicApi.git</span><br><span class="line">$ <span class="built_in">cd</span> NeteaseCloudMusicApi &amp;&amp; npm install</span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>在运行本项目前，确保系统已经全局安装了taro，<a href="https://nervjs.github.io/taro/docs/GETTING-STARTED.html" target="_blank" rel="noopener">安装可详见这里</a>，安装完运行项目后使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html" target="_blank" rel="noopener">微信开发者工具</a> 导入项目（本项目根目录进行导入），开发前注意事项可查看: <a href="https://nervjs.github.io/taro/docs/before-dev-remind.html" target="_blank" rel="noopener">https://nervjs.github.io/taro/docs/before-dev-remind.html</a></p>
 </blockquote>
-<pre><code class="language-bash"># git clone
-$ git clone https://github.com/huangzhuangjia/taro-music.git
-# install
-$ npm i
-# or yarn install
-$ yarn install
-# development
-$ npm run dev:weapp
-# production
-$ npm run build:weapp
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git clone</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/huangzhuangjia/taro-music.git</span><br><span class="line"><span class="comment"># install</span></span><br><span class="line">$ npm i</span><br><span class="line"><span class="comment"># or yarn install</span></span><br><span class="line">$ yarn install</span><br><span class="line"><span class="comment"># development</span></span><br><span class="line">$ npm run dev:weapp</span><br><span class="line"><span class="comment"># production</span></span><br><span class="line">$ npm run build:weapp</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -368,14 +365,14 @@ $ npm run build:weapp
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -388,6 +385,24 @@ $ npm run build:weapp
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2019/01/11/taro-music/" title="🔥基于taro + dva + typescript 开发的音乐播放器小程序">https://huangzhuangjia.github.io/2019/01/11/taro-music/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -445,6 +460,16 @@ $ npm run build:weapp
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -481,9 +506,9 @@ $ npm run build:weapp
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -586,7 +611,7 @@ $ npm run build:weapp
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -718,6 +743,26 @@ $ npm run build:weapp
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2019/01/11/taro-music/';
+          this.page.identifier = '2019/01/11/taro-music/';
+          this.page.title = '🔥基于taro + dva + typescript 开发的音乐播放器小程序';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -730,10 +775,6 @@ $ npm run build:weapp
   
 
 
-
-
-
-  
 
 
 

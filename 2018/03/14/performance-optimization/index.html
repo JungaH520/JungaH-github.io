@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Junga&#39;s Blog">
 <meta property="og:description" content="优化的原则和方向 前端性能优化的原则其实就是更好的用户体验，具体实现的目标大体有两个：   合理使用内存或缓存，减少请求； 减少CPU或者GPU的计算，达到更快的展现。   前端在性能优化的方向大体有两个：   减少页面体积，提升网络加载 优化页面渲染">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-11T03:51:42.579Z">
+<meta property="og:updated_time" content="2019-01-11T09:34:16.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端性能优化总结">
 <meta name="twitter:description" content="优化的原则和方向 前端性能优化的原则其实就是更好的用户体验，具体实现的目标大体有两个：   合理使用内存或缓存，减少请求； 减少CPU或者GPU的计算，达到更快的展现。   前端在性能优化的方向大体有两个：   减少页面体积，提升网络加载 优化页面渲染">
@@ -256,7 +256,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2018/03/14/performance-optimization/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -295,6 +295,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/14/performance-optimization/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/03/14/performance-optimization/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -363,100 +373,26 @@
 <blockquote>
 <p>先将src赋值成一个通用的预览图，下拉时候再动态赋值成正式的图片。如下，preview.png是预览图片，比较小，加载很快，而且很多图片都共用这个preview.png，加载一次即可。待页面下拉，图片显示出来时，再去替换src为data-src的值。（data-开头的属性浏览器渲染的时候会忽略掉，提高渲染性能）</p>
 </blockquote>
-<pre><code class="language-js">    &lt;img src=&quot;preview.png&quot; data-src=&quot;realImg.png&quot;/&gt;
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="string">"preview.png"</span> data-src=<span class="string">"realImg.png"</span>/&gt;</span><br></pre></td></tr></table></figure>
 <p>3、减少DOM 查询，对 DOM 查询做缓存</p>
-<pre><code class="language-js">    // 只查询一个 DOM ，缓存在 pList 中了
-    var pList = document.getElementsByTagName('p')  
-    for (var i = 0; i &lt; pList.length; i++) {
-    }
-    // 每次循环，都会查询 DOM ，耗费性能
-    for (var i = 0; i &lt; document.getElementsByTagName('p').length; i++) {
-    }
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只查询一个 DOM ，缓存在 pList 中了</span></span><br><span class="line"><span class="keyword">var</span> pList = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'p'</span>)  </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; pList.length; i++) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 每次循环，都会查询 DOM ，耗费性能</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.getElementsByTagName(<span class="string">'p'</span>).length; i++) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>4、减少DOM 操作，多个操作尽量合并在一起执行（DocumentFragment）</p>
 <blockquote>
 <p>DOM 操作是非常耗费性能的，因此插入多个标签时，先插入 Fragment 然后再统一插入 DOM。因为Fragment文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时不会引起页面回流。</p>
 </blockquote>
-<pre><code class="language-js">    var listNode = document.getElementById('list')
-    // 要插入 10 个 li 标签
-    var frag = document.createDocumentFragment();
-    var i, li;
-    for(i = 0; i &lt; 10; i++) {
-        li = document.createElement(&quot;li&quot;);
-        li.innerHTML = &quot;List item &quot; + i;
-        frag.appendChild(li);  //先放在 frag 中，最后一次性插入到 DOM 结构中。
-    }
-    listNode.appendChild(frag);
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> listNode = <span class="built_in">document</span>.getElementById(<span class="string">'list'</span>)</span><br><span class="line"><span class="comment">// 要插入 10 个 li 标签</span></span><br><span class="line"><span class="keyword">var</span> frag = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"><span class="keyword">var</span> i, li;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    li = <span class="built_in">document</span>.createElement(<span class="string">"li"</span>);</span><br><span class="line">    li.innerHTML = <span class="string">"List item "</span> + i;</span><br><span class="line">    frag.appendChild(li);  <span class="comment">//先放在 frag 中，最后一次性插入到 DOM 结构中。</span></span><br><span class="line">&#125;</span><br><span class="line">listNode.appendChild(frag);</span><br></pre></td></tr></table></figure>
 <p>5、事件节流</p>
 <blockquote>
 <p>在开发过程中会遇到页面一些频繁触发的事件，比如mouseover、scroll、resize等事件。一秒可以执行很多次，这样会造成严重的页面性能问题，导致页面c出现卡顿甚至浏览器崩溃。因此我们需要对事件进行节流，简单的说就是控制其执行的次数。这里就涉及到了常用到的js的节流和防抖功能实现。<br>
 1、 防抖（debounce）：在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。</p>
 </blockquote>
-<pre><code class="language-js">    function debounce(fn, delay) {
-        // 定时器，用来 setTimeout
-        var timer
-        // 返回一个函数，这个函数会在一个时间区间结束后的 delay 毫秒时执行 fn 函数
-        return function () {
-            // 保存函数调用时的上下文和参数，传递给 fn
-            var context = this
-            var args = arguments
-            // 每次这个返回的函数被调用，就清除定时器，以保证不执行 fn
-            timer &amp;&amp; clearTimeout(timer)
-            // 当返回的函数被最后一次调用后（也就是用户停止了某个连续的操作），
-            // 再过 delay 毫秒就执行 fn
-            timer = setTimeout(function () {
-                fn.apply(context, args)
-            }, delay)
-        }
-    }
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 定时器，用来 setTimeout</span></span><br><span class="line">    <span class="keyword">var</span> timer</span><br><span class="line">    <span class="comment">// 返回一个函数，这个函数会在一个时间区间结束后的 delay 毫秒时执行 fn 函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 保存函数调用时的上下文和参数，传递给 fn</span></span><br><span class="line">        <span class="keyword">var</span> context = <span class="keyword">this</span></span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span></span><br><span class="line">        <span class="comment">// 每次这个返回的函数被调用，就清除定时器，以保证不执行 fn</span></span><br><span class="line">        timer &amp;&amp; clearTimeout(timer)</span><br><span class="line">        <span class="comment">// 当返回的函数被最后一次调用后（也就是用户停止了某个连续的操作），</span></span><br><span class="line">        <span class="comment">// 再过 delay 毫秒就执行 fn</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn.apply(context, args)</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>2、节流（throttle）：规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。</p>
 </blockquote>
-<pre><code class="language-js">    function throttle(fn, threshhold) {
-        // 记录上次执行的时间
-        var last
-        // 定时器
-        var timer
-        // 默认间隔为 250ms
-        threshhold || (threshhold = 250)
-        // 返回的函数，每过 threshhold 毫秒就执行一次 fn 函数
-        return function () {
-            // 保存函数调用时的上下文和参数，传递给 fn
-            var context = this
-            var args = arguments
-
-            var now = +new Date()
-            // 如果距离上次执行 fn 函数的时间小于 threshhold，那么就放弃
-            // 执行 fn，并重新计时
-            if (last &amp;&amp; now &lt; last + threshhold) {
-                timer &amp;&amp; clearTimeout(timer)
-                // 保证在当前时间区间结束后，再执行一次 fn
-                timer = setTimeout(function () {
-                    last = now
-                    fn.apply(context, args)
-                }, threshhold)
-            // 在时间区间的最开始和到达指定间隔的时候执行一次 fn
-            } else {
-                last = now
-                fn.apply(context, args)
-            }
-        }
-    }
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, threshhold</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 记录上次执行的时间</span></span><br><span class="line">    <span class="keyword">var</span> last</span><br><span class="line">    <span class="comment">// 定时器</span></span><br><span class="line">    <span class="keyword">var</span> timer</span><br><span class="line">    <span class="comment">// 默认间隔为 250ms</span></span><br><span class="line">    threshhold || (threshhold = <span class="number">250</span>)</span><br><span class="line">    <span class="comment">// 返回的函数，每过 threshhold 毫秒就执行一次 fn 函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 保存函数调用时的上下文和参数，传递给 fn</span></span><br><span class="line">        <span class="keyword">var</span> context = <span class="keyword">this</span></span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> now = +<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">        <span class="comment">// 如果距离上次执行 fn 函数的时间小于 threshhold，那么就放弃</span></span><br><span class="line">        <span class="comment">// 执行 fn，并重新计时</span></span><br><span class="line">        <span class="keyword">if</span> (last &amp;&amp; now &lt; last + threshhold) &#123;</span><br><span class="line">            timer &amp;&amp; clearTimeout(timer)</span><br><span class="line">            <span class="comment">// 保证在当前时间区间结束后，再执行一次 fn</span></span><br><span class="line">            timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                last = now</span><br><span class="line">                fn.apply(context, args)</span><br><span class="line">            &#125;, threshhold)</span><br><span class="line">        <span class="comment">// 在时间区间的最开始和到达指定间隔的时候执行一次 fn</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            last = now</span><br><span class="line">            fn.apply(context, args)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>6、尽早执行操作（DOMContentLoaded）</p>
-<pre><code class="language-js">    window.addEventListener('load', function () {
-        // 页面的全部资源加载完才会执行，包括图片、视频等
-    })
-    document.addEventListener('DOMContentLoaded', function () {
-        // DOM 渲染完即可执行，此时图片、视频还可能没有加载完
-    })
-    $(document).ready({function () {
-        // 同DOMContentLoaded
-    })
-</code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 页面的全部资源加载完才会执行，包括图片、视频等</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// DOM 渲染完即可执行，此时图片、视频还可能没有加载完</span></span><br><span class="line">&#125;)</span><br><span class="line">$(<span class="built_in">document</span>).ready(&#123;<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 同DOMContentLoaded</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>7、使用 <strong>预渲染</strong> 或者 <strong>SSR后端渲染</strong>，数据直接输出到 HTML 中，减少浏览器使用 JS 模板渲染页面 HTML 的时间 (如Vue SSR)，同时也有利于网站的SEO。</p>
 
       
@@ -478,14 +414,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -498,6 +434,24 @@
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2018/03/14/performance-optimization/" title="前端性能优化总结">https://huangzhuangjia.github.io/2018/03/14/performance-optimization/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -559,6 +513,16 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -595,9 +559,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -700,7 +664,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -832,6 +796,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2018/03/14/performance-optimization/';
+          this.page.identifier = '2018/03/14/performance-optimization/';
+          this.page.title = '前端性能优化总结';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -844,10 +828,6 @@
   
 
 
-
-
-
-  
 
 
 

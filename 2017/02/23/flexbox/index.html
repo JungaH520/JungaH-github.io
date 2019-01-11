@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png">
 <meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071014.png">
 <meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071016.png">
-<meta property="og:updated_time" content="2019-01-11T03:51:42.579Z">
+<meta property="og:updated_time" content="2019-01-11T09:30:24.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flexbox学习小记">
 <meta name="twitter:description" content="因为现在的公司要求布局的兼容性要兼容到至少IE7，所以对于flexbox这种布局也没有了解太多，之前有听说过flex布局，听起来是一种比较高大上，可以自适应不同尺寸屏幕的布局方式，但是没有正式的去学习了解。flexbox是CSS3算是比较新的一个特性，最近刚好有时间也有兴趣就了解了，觉得还是要做一下总结，不然很快又忘了😰。 flexbox布局意为弹性布局，是css3的弹性盒子模式，用它可以告别f">
@@ -267,7 +267,7 @@
     <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2017/02/23/flexbox/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Junga Huang">
+      <meta itemprop="name" content="JungaH">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
@@ -306,6 +306,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/23/flexbox/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/23/flexbox/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -377,19 +387,13 @@
 <h2 id="flex容器属性："><a class="header-anchor" href="#flex容器属性："></a>Flex容器属性：</h2>
 <h3 id="display属性"><a class="header-anchor" href="#display属性"></a>display属性</h3>
 <p>display定义了一个Flex容器，为其内容建立新的伸缩格式化上下文。其中flex是块伸缩容器，inline-flex是内联伸缩容器。</p>
-<pre><code class="language-css">  .container{
-      display: flex;/* or inline-flex*/
-  }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;<span class="comment">/* or inline-flex*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>如果元素display的值指定为inline-flex，而且元素是一个浮动元素或绝对定位元素，则display的计算值是flex。</p>
 </blockquote>
 <h3 id="flex-direction属性"><a class="header-anchor" href="#flex-direction属性"></a>flex-direction属性</h3>
 <p>flex-direction定义了flex容器里面的flex项目的排列方向，水平排列和竖直排列</p>
-<pre><code class="language-css">  .container { 
-    flex-direction: row | row-reverse | column | column-reverse; 
-  }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123; </span><br><span class="line">  <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>row(默认值): 主轴为水平方向，从左向右排列</li>
 <li>row-reverse: 主轴为水平方向，从右向左排列</li>
@@ -398,10 +402,7 @@
 </ul>
 <h3 id="flex-wrap属性"><a class="header-anchor" href="#flex-wrap属性"></a>flex-wrap属性</h3>
 <p>flex-wrap定义了当一行或者一列排不上，flex项目是否换行，默认是不换行。</p>
-<pre><code class="language-css">  .container {
-    flex-wrap: nowrap | wrap | wrap-reverse;
-  }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>nowrap(默认值): 单行显示不换行</li>
 </ul>
@@ -418,10 +419,7 @@
 <p>flex-flow是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。道理就跟border: 1px solid red类似，多个值写在同一行。</p>
 <h3 id="justify-content属性"><a class="header-anchor" href="#justify-content属性"></a>justify-content属性</h3>
 <p>justify-content定义了flex项目在flex容器主轴中的对齐方式。</p>
-<pre><code class="language-css"> container{
-   justify-content: {flex-start | flex-end | center | space-between | space-around;
- }
-</code></pre>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">container</span>&#123;</span><br><span class="line">  <span class="attribute">justify-content</span>: &#123;flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <div align="center">
   <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png" alt="示意图">
 </div>
@@ -434,10 +432,7 @@
 </ul>
 <h3 id="align-items属性"><a class="header-anchor" href="#align-items属性"></a>align-items属性</h3>
 <p>align-items定义了flex项目在flex容器竖轴上的对齐方式。类似justify-content属性，只不过是方向不同。</p>
-<pre><code class="language-css"> container{
-   align-items: {flex-start | flex-end | center | baseline | stretch;
- }
-</code></pre>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">container</span>&#123;</span><br><span class="line">  <span class="attribute">align-items</span>: &#123;flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <div align="center">
   <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png" alt="示意图">
 </div>
@@ -450,10 +445,7 @@
 </ul>
 <h3 id="align-content属性"><a class="header-anchor" href="#align-content属性"></a>align-content属性</h3>
 <p>align-content属性定义了多根轴线的对齐方式。当伸缩容器的侧轴还有多余空间时，align-content属性可以用来调准伸缩行在伸缩容器里的对齐方式，这与调准伸缩项目在主轴上对齐方式的justify-content属性类似。</p>
-<pre><code class="language-css">  container{
-    align-items: {flex-start | flex-end | center | baseline | stretch;
-  }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">container</span>&#123;</span><br><span class="line">  <span class="attribute">align-items</span>: &#123;flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <div align="center">
   <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" alt="示意图">
 </div>
@@ -468,47 +460,32 @@
 <h2 id="flex项目属性："><a class="header-anchor" href="#flex项目属性："></a>Flex项目属性：</h2>
 <h3 id="order属性"><a class="header-anchor" href="#order属性"></a>order属性</h3>
 <p>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
-<pre><code class="language-css"> .item {
-   order: &lt;integer&gt;;
- }
-</code></pre>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">order</span>: &lt;integer&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>根据order重新排序伸缩项目。有最小（负值最大）order的伸缩项目排在第一个。若有多个项目有相同的order值，这些项目照文件顺序排。这个步骤影响了伸缩项目生盒树成的盒子的顺序，也影响了后面的演算法如何处理各项目。</p>
 </blockquote>
 <h3 id="flex-grow属性"><a class="header-anchor" href="#flex-grow属性"></a>flex-grow属性</h3>
 <p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。flex-grow取负值将失效。</p>
-<pre><code class="language-css"> .item {
-   flex-grow: &lt;number&gt;; /* default 0 */
- }
-</code></pre>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-grow</span>: &lt;number&gt;; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
  <div align="center">
   <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071014.png" alt="示意图">
  </div>
 <p>如上图所示，若所有flex项目的flex-grow属性都为1，则flex容器中的flex项目尺寸都相等，若其中一个为2其他为1，则为其他flex项目的两倍。</p>
 <h3 id="flex-shrink属性"><a class="header-anchor" href="#flex-shrink属性"></a>flex-shrink属性</h3>
 <p>flex-shrink属性则与flex-grow属性相反，定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。与flex-grow一样，flex-shrink取负值将失效。</p>
-<pre><code class="language-css">  .item {
-    flex-shrink: &lt;number&gt;; /* default 1 */
-  }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: &lt;number&gt;; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="flex-basis属性"><a class="header-anchor" href="#flex-basis属性"></a>flex-basis属性</h3>
 <p>flex-basis属性定义了Flex项目在分配Flex容器剩余空间之前的一个默认尺寸，通俗一点是说在flex-grow和flex-shrink属性调整它的大小以适应Flex容器之前，可以指定Flex项目的初始大小。它的默认值为auto，即项目的本来大小。flex-basis可以取任何用于width属性的任何值，比如 % || em || rem || px等。</p>
 <blockquote>
 <p>注意：如果flex-basis属性的值是0时，也需要使用单位。即flex-basis: 0px不能写成flex-basis:0。</p>
 </blockquote>
-<pre><code class="language-css"> .item {
-   flex-basis: &lt;length&gt; | auto; /* default auto */ 
-  }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-basis</span>: &lt;length&gt; | auto; <span class="comment">/* default auto */</span> </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="flex属性"><a class="header-anchor" href="#flex属性"></a>flex属性</h3>
 <p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。</p>
 <blockquote>
 <p>注意：flex-grow第一，然后是flex-shrink，最后是flex-basis。缩写成GSB。</p>
 </blockquote>
-<pre><code class="language-css"> .item { 
-   flex: 0 1 auto;/*flex-grow: 0; flex-shrink: 1; flex-basis: auto;*/
- }
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123; </span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">1</span> auto;<span class="comment">/*flex-grow: 0; flex-shrink: 1; flex-basis: auto;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>flex常见值:</p>
 <ol>
 <li>
@@ -564,14 +541,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="Junga Huang 微信支付">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Junga Huang 支付宝">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -584,6 +561,24 @@
       </div>
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2017/02/23/flexbox/" title="flexbox学习小记">https://huangzhuangjia.github.io/2017/02/23/flexbox/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -645,6 +640,16 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -681,9 +686,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Junga Huang">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
             
-              <p class="site-author-name" itemprop="name">Junga Huang</p>
+              <p class="site-author-name" itemprop="name">JungaH</p>
               <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
           </div>
 
@@ -786,7 +791,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Junga Huang</span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
 
   
 </div>
@@ -918,6 +923,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://jungahuang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://huangzhuangjia.github.io/2017/02/23/flexbox/';
+          this.page.identifier = '2017/02/23/flexbox/';
+          this.page.title = 'flexbox学习小记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jungahuang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -930,10 +955,6 @@
   
 
 
-
-
-
-  
 
 
 
