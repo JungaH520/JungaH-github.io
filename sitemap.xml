@@ -2,9 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://huangzhuangjia.github.io/categories/index.html</loc>
+    
+    <lastmod>2019-01-11T14:55:32.321Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2019/01/11/taro-music/</loc>
+    
+    <lastmod>2019-01-11T14:54:35.485Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/</loc>
     
-    <lastmod>2019-01-11T14:34:14.929Z</lastmod>
+    <lastmod>2019-01-11T14:54:11.830Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2017/03/05/scope-and-closure/</loc>
+    
+    <lastmod>2019-01-11T14:53:53.648Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2018/02/07/About-responsive-of-Vue/</loc>
+    
+    <lastmod>2019-01-11T14:53:40.457Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2018/03/14/performance-optimization/</loc>
+    
+    <lastmod>2019-01-11T14:53:31.513Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2017/02/21/javascript-memory/</loc>
+    
+    <lastmod>2019-01-11T14:53:07.044Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2017/02/15/hello-world/</loc>
+    
+    <lastmod>2019-01-11T14:52:59.366Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2017/02/23/flexbox/</loc>
+    
+    <lastmod>2019-01-11T14:52:39.846Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2017/02/16/css-clearFloat/</loc>
+    
+    <lastmod>2019-01-11T14:50:28.343Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/2017/02/17/event-Loop/</loc>
+    
+    <lastmod>2019-01-11T14:50:24.572Z</lastmod>
     
   </url>
   
@@ -23,79 +93,9 @@
   </url>
   
   <url>
-    <loc>https://huangzhuangjia.github.io/2019/01/11/taro-music/</loc>
-    
-    <lastmod>2019-01-11T09:55:56.313Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2018/03/14/performance-optimization/</loc>
-    
-    <lastmod>2019-01-11T09:34:16.992Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/02/21/javascript-memory/</loc>
-    
-    <lastmod>2019-01-11T09:32:09.278Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/02/17/event-Loop/</loc>
-    
-    <lastmod>2019-01-11T09:31:37.419Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/02/23/flexbox/</loc>
-    
-    <lastmod>2019-01-11T09:30:24.507Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/03/05/scope-and-closure/</loc>
-    
-    <lastmod>2019-01-11T09:28:59.009Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2018/02/07/About-responsive-of-Vue/</loc>
-    
-    <lastmod>2019-01-11T09:14:15.544Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://huangzhuangjia.github.io/social/index.html</loc>
     
     <lastmod>2019-01-11T07:00:36.323Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/02/15/hello-world/</loc>
-    
-    <lastmod>2019-01-11T06:28:44.672Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/categories/index.html</loc>
-    
-    <lastmod>2019-01-11T03:51:42.580Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/02/16/css-clearFloat/</loc>
-    
-    <lastmod>2019-01-11T03:51:42.579Z</lastmod>
     
   </url>
   

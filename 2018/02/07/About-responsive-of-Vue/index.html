@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Vue，源码阅读,">
+  <meta name="keywords" content="JavaScript,Vue,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="初步 最近一段时间在阅读Vue源码，从它的核心原理入手，开始了源码的学习，而其核心原理就是其数据的响应式，讲到Vue的响应式原理，我们可以从它的兼容性说起，Vue不支持IE8以下版本的浏览器，因为Vue是基于 Object.defineProperty 来实现数据响应的，而 Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是为什么 Vue 不支持 IE8">
-<meta name="keywords" content="Vue，源码阅读">
+<meta name="keywords" content="JavaScript,Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解Vue响应式原理">
 <meta property="og:url" content="https://huangzhuangjia.github.io/2018/02/07/About-responsive-of-Vue/index.html">
@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cn.vuejs.org/images/data.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/huangzhuangjia/Vue-learn/master/doc/img/vue-reactive.jpg">
-<meta property="og:updated_time" content="2019-01-11T09:14:15.544Z">
+<meta property="og:updated_time" content="2019-01-11T14:53:40.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Vue响应式原理">
 <meta name="twitter:description" content="初步 最近一段时间在阅读Vue源码，从它的核心原理入手，开始了源码的学习，而其核心原理就是其数据的响应式，讲到Vue的响应式原理，我们可以从它的兼容性说起，Vue不支持IE8以下版本的浏览器，因为Vue是基于 Object.defineProperty 来实现数据响应的，而 Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是为什么 Vue 不支持 IE8">
@@ -223,6 +223,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
@@ -336,6 +346,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -506,7 +538,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Vue，源码阅读/" rel="tag"><i class="fa fa-tag"></i> Vue，源码阅读</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
           
         </div>
       
@@ -627,13 +661,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

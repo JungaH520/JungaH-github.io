@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Junga&#39;s Blog">
 <meta property="og:description" content="面试的时候，关于清除浮动的问题经常会被考察，一开始对清除浮动了解不深，只知道css有个clear属性。在平时开发中也经常会用到float布局方式，之前因为了解不深，所以使用这种布局的时候经常出现问题。后面查找资料才发现原来清除浮动后面大有学问，了解清除浮动有利于我们对布局的开发，下面是对了解之后作出的一些总结，可能总结的不全面。 在了解清除浮动之前，先看下什么是BFC。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-11T03:51:42.579Z">
+<meta property="og:updated_time" content="2019-01-11T14:50:28.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS之清除浮动">
 <meta name="twitter:description" content="面试的时候，关于清除浮动的问题经常会被考察，一开始对清除浮动了解不深，只知道css有个clear属性。在平时开发中也经常会用到float布局方式，之前因为了解不深，所以使用这种布局的时候经常出现问题。后面查找资料才发现原来清除浮动后面大有学问，了解清除浮动有利于我们对布局的开发，下面是对了解之后作出的一些总结，可能总结的不全面。 在了解清除浮动之前，先看下什么是BFC。">
@@ -220,6 +220,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
@@ -333,6 +343,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -608,13 +640,22 @@ In a block formatting context, each box’s left outer edge touches the left edg
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
