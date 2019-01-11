@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>blog | Junga</title>
+  <title>Junga&#39;s blog</title>
   <icon>https://www.gravatar.com/avatar/662a2e5877ea920dd2ace92b7b842a98</icon>
   <subtitle>Coding Change My Life🤓</subtitle>
   <link href="/atom.xml" rel="self"/>
