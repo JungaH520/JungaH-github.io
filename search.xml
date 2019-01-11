@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>🔥基于taro + dva + typescript 开发的音乐播放器小程序</title>
+      <link href="/2019/01/11/taro-music/"/>
+      <url>/2019/01/11/taro-music/</url>
+      
+        <content type="html"><![CDATA[<h1>简介</h1><p>本项目是基于 <a href="https://github.com/NervJS/taro" target="_blank" rel="noopener">Taro</a> + <a href="https://dvajs.com/" target="_blank" rel="noopener">Dva</a> + <a href="https://www.tslang.cn/index.html" target="_blank" rel="noopener">TypeScript</a> 开发的音乐播放器小程序，是个人用于学习taro框架开发的，功能也相对简单，当然也存在一些不足，前期是用taro的redux版本开发，后面发现业务代码和页面耦合度高，就加入了dva，一个基于 <a href="https://github.com/reduxjs/redux" target="_blank" rel="noopener">redux</a> 和 <a href="https://github.com/redux-saga/redux-saga" target="_blank" rel="noopener">redux-saga</a> 的数据流方案，这里只用了dva的一个核心 <a href="https://github.com/dvajs/dva/tree/master/packages/dva-core" target="_blank" rel="noopener">dva-core</a>，用于model层来降低耦合，用 <a href="https://github.com/dvajs/dva-model-extend" target="_blank" rel="noopener">dva-model-extend</a> 复用 model，大大提升了开发体验，效果不错。后台是网易云音乐<a href="https://binaryify.github.io/NeteaseCloudMusicApi/#/" target="_blank" rel="noopener">NeteaseCloudMusicApi</a> 提供的API，目前该项目还没有正式上线到小程序。</p><a id="more"></a><p><a href="https://github.com/huangzhuangjia/taro-music/blob/master/src/assets/image/music.gif?raw=true" target="_blank" rel="noopener"><img src="https://github.com/huangzhuangjia/taro-music/blob/master/src/assets/image/music.gif?raw=true" alt="music.gif"></a></p><h1>Usage</h1><blockquote><p>本项目已经使用了线上api接口，所以无需运行后台也可以获取数据，当然你也可以在本地运行 <a href="https://binaryify.github.io/NeteaseCloudMusicApi/#/" target="_blank" rel="noopener">NeteaseCloudMusicApi</a> 项目，开启获取歌曲服务，默认端口是3000</p></blockquote><pre><code class="language-bash">$ git clone git@github.com:Binaryify/NeteaseCloudMusicApi.git$ cd NeteaseCloudMusicApi &amp;&amp; npm install$ npm start</code></pre><blockquote><p>在运行本项目前，确保系统已经全局安装了taro，<a href="https://nervjs.github.io/taro/docs/GETTING-STARTED.html" target="_blank" rel="noopener">安装可详见这里</a>，安装完运行项目后使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html" target="_blank" rel="noopener">微信开发者工具</a> 导入项目（本项目根目录进行导入），开发前注意事项可查看: <a href="https://nervjs.github.io/taro/docs/before-dev-remind.html" target="_blank" rel="noopener">https://nervjs.github.io/taro/docs/before-dev-remind.html</a></p></blockquote><pre><code class="language-bash"># git clone$ git clone https://github.com/huangzhuangjia/taro-music.git# install$ npm i# or yarn install$ yarn install# development$ npm run dev:weapp# production$ npm run build:weapp</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 小程序，React </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>前端性能优化总结</title>
       <link href="/2018/03/14/performance-optimization/"/>
       <url>/2018/03/14/performance-optimization/</url>

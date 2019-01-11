@@ -78,15 +78,12 @@
 </script>
 
 
-    
-    
-
 
 <meta name="description" content="Junga&apos;s blog">
 <meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,编程,代码,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta property="og:type" content="website">
 <meta property="og:title" content="blog | Junga">
-<meta property="og:url" content="https://huangzhuangjia.github.io/index.html">
+<meta property="og:url" content="https://huangzhuangjia.github.io/archives/2019/01/index.html">
 <meta property="og:site_name" content="blog | Junga">
 <meta property="og:description" content="Junga&apos;s blog">
 <meta property="og:locale" content="zh-Hans">
@@ -124,13 +121,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
-    <style> .article { opacity: 0;} </style>
-
 
 <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Blog | blog | Junga</title>
+<title>所有文章: 2019/1 | blog | Junga</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -139,9 +134,9 @@
     var yiliaConfig = {
         fancybox: false,
         animate: true,
-        isHome: true,
+        isHome: false,
         isPost: false,
-        isArchive: false,
+        isArchive: true,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -162,9 +157,6 @@
 
 
 
-
-	<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/semantic-ui/0.19.3/css/semantic.min.css" data-no-instant="">
-	<script src="//cdn.bootcss.com/semantic-ui/0.19.3/javascript/semantic.min.js" data-no-instant=""></script>
 
 	<!-- 右下角搜索 -->
 <script><!-- 移动端不需要的样式不加载 -->
@@ -525,937 +517,58 @@
 
       <div class="body-wrap">
   
-    <article id="post-taro-music" class="article article-type-post" itemscope="" itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2019/01/11/taro-music/" class="article-date">
-      <time datetime="2019-01-11T06:35:51.000Z" itemprop="datePublished">2019-01-11</time>
+    
+    
+      
+      
+      <section id="id_archives" class="archives-wrap article">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a href="/2019/01/11/taro-music/" class="archive-article-date">
+      <time datetime="2019-01-11T06:35:51.000Z" itemprop="datePublished">01-11</time>
 </a>
 
 
-    <a class="hint  hint--left" href="/2019/01/11/taro-music/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
 
 
 
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui red ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
+        </div>
+         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/11/taro-music/">🔥基于taro + dva + typescript 开发的音乐播放器小程序</a>
+      <a class="archive-article-title" href="/2019/01/11/taro-music/">🔥基于taro + dva + typescript 开发的音乐播放器小程序</a>
     </h1>
   
 
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2019/01/11/taro-music/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <h1>简介</h1>
-<p>本项目是基于 <a href="https://github.com/NervJS/taro" target="_blank" rel="noopener">Taro</a> + <a href="https://dvajs.com/" target="_blank" rel="noopener">Dva</a> + <a href="https://www.tslang.cn/index.html" target="_blank" rel="noopener">TypeScript</a> 开发的音乐播放器小程序，是个人用于学习taro框架开发的，功能也相对简单，当然也存在一些不足，前期是用taro的redux版本开发，后面发现业务代码和页面耦合度高，就加入了dva，一个基于 <a href="https://github.com/reduxjs/redux" target="_blank" rel="noopener">redux</a> 和 <a href="https://github.com/redux-saga/redux-saga" target="_blank" rel="noopener">redux-saga</a> 的数据流方案，这里只用了dva的一个核心 <a href="https://github.com/dvajs/dva/tree/master/packages/dva-core" target="_blank" rel="noopener">dva-core</a>，用于model层来降低耦合，用 <a href="https://github.com/dvajs/dva-model-extend" target="_blank" rel="noopener">dva-model-extend</a> 复用 model，大大提升了开发体验，效果不错。后台是网易云音乐<a href="https://binaryify.github.io/NeteaseCloudMusicApi/#/" target="_blank" rel="noopener">NeteaseCloudMusicApi</a> 提供的API，目前该项目还没有正式上线到小程序。</p>
-    </div>
-  
+        <div class="article-info info-on-archive"> 
+          
 
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
+          
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序，React/">小程序，React</a></li></ul>
     </div>
 
 
-      
-        <p class="article-more-link">
-          <a href="/2019/01/11/taro-music/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-
- 
-  
 </article>
-
-
-
-
-
-
-
-
-
-
-
   
-    <article id="post-performance-optimization" class="article article-type-post" itemscope="" itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2018/03/14/performance-optimization/" class="article-date">
-      <time datetime="2018-03-14T13:35:47.000Z" itemprop="datePublished">2018-03-14</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2018/03/14/performance-optimization/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui red ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/14/performance-optimization/">前端性能优化总结</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2018/03/14/performance-optimization/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <h1>优化的原则和方向</h1>
-<p>前端性能优化的原则其实就是更好的用户体验，具体实现的目标大体有两个：</p>
-<blockquote>
-<ol>
-<li>合理使用内存或缓存，减少请求；</li>
-<li>减少CPU或者GPU的计算，达到更快的展现。</li>
-</ol>
-</blockquote>
-<p>前端在性能优化的方向大体有两个：</p>
-<blockquote>
-<ol>
-<li>减少页面体积，提升网络加载</li>
-<li>优化页面渲染</li>
-</ol>
-</blockquote>
-    </div>
+    </div></section>
   
 
     
-    <div class="article-info article-info-index">
-      
-      
 
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能优化/">性能优化</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2018/03/14/performance-optimization/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-About-responsive-of-Vue" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/02/07/About-responsive-of-Vue/" class="article-date">
-      <time datetime="2018-02-07T14:44:06.000Z" itemprop="datePublished">2018-02-07</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2018/02/07/About-responsive-of-Vue/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui blue ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/07/About-responsive-of-Vue/">深入理解Vue响应式原理</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2018/02/07/About-responsive-of-Vue/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <h1>初步</h1>
-<p>最近一段时间在阅读Vue源码，从它的核心原理入手，开始了源码的学习，而其核心原理就是其数据的响应式，讲到Vue的响应式原理，我们可以从它的兼容性说起，Vue不支持IE8以下版本的浏览器，因为Vue是基于 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="noopener">Object.defineProperty</a> 来实现数据响应的，而 Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是为什么 Vue 不支持 IE8 以及更低版本浏览器的原因；Vue通过Object.defineProperty的 <strong>getter/setter</strong> 对收集的依赖项进行监听,在属性被访问和修改时通知变化,进而更新视图数据；</p>
-<p>受现代JavaScript 的限制 (以及废弃 <strong>Object.observe</strong>)，Vue不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 <strong>getter/setter</strong> 转化过程，所以属性必须在 <strong>data</strong> 对象上存在才能让Vue转换它，这样才能让它是响应的。</p>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue，源码阅读/">Vue，源码阅读</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2018/02/07/About-responsive-of-Vue/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-something-about-web-app" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/07/30/something-about-web-app/" class="article-date">
-      <time datetime="2017-07-30T14:54:06.000Z" itemprop="datePublished">2017-07-30</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/07/30/something-about-web-app/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui red ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/30/something-about-web-app/">关于移动端开发中遇到的坑</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/07/30/something-about-web-app/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <p>三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就搞事情，给我安排了后台移动端的开发，就是为了方便领导手机上使用，基于内部项目都是用了Vue，最后确定用Vue+一个移动端的基于Vue的UI框架Vux进行开发，于是就进入了移动端的踩坑之旅，之前比较少接触移动端开发。<br>
-项目开发是基于Vue的UI框架Vux，其实就是一套基于We-UI的一套移动端UI框架，但根据实际情况，一些布局还是得自己去重构。于是就愉快的踩起了移动端开发的坑。</p>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端web开发/">移动端web开发</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/07/30/something-about-web-app/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-scope-and-closure" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/05/scope-and-closure/" class="article-date">
-      <time datetime="2017-03-05T07:52:36.000Z" itemprop="datePublished">2017-03-05</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/03/05/scope-and-closure/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui green ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/05/scope-and-closure/">作用域与闭包的一二事</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/03/05/scope-and-closure/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <p>闭包是JavaScript语言的一大特点，可以说再开发的过程中，它无处不在，即使有时候我们都没有发现它的存在。接触JavaScript以来，虽然说是一直有对闭包了解，但是实际应用起来或者分析一些代码的时候却有些吃力。现在回过头总结，才又进一步的揭开了闭包的一层面纱。而在讲闭包之前，我们要先明白JavaScript中又一个重要的知识，那就是JavaScript的内存机制以及作用域，这两个是我们有效理解闭包原理的前提吧。前面我们已经讲了JavaScript的内存机制，那么在这里先理解什么是作用域和作用域链。</p>
-<h1>作用域与作用域链</h1>
-<p>之前我们已经了解了JavaScript内存以及垃圾回收的机制了，在讲作用域之前，其实还有一个知识点，那就是JavaScript的执行环境产生的变量对象。</p>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/03/05/scope-and-closure/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flexbox" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/23/flexbox/" class="article-date">
-      <time datetime="2017-02-23T09:21:56.000Z" itemprop="datePublished">2017-02-23</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/02/23/flexbox/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui purple ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/23/flexbox/">flexbox学习小记</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/02/23/flexbox/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <p>因为现在的公司要求布局的兼容性要兼容到至少IE7，所以对于flexbox这种布局也没有了解太多，之前有听说过flex布局，听起来是一种比较高大上，可以自适应不同尺寸屏幕的布局方式，但是没有正式的去学习了解。flexbox是CSS3算是比较新的一个特性，最近刚好有时间也有兴趣就了解了，觉得还是要做一下总结，不然很快又忘了😰。</p>
-<p>flexbox布局意为弹性布局，是css3的弹性盒子模式，用它可以告别float布局，也可以简单实现垂直居中，并且具有响应式，就是可以自动调整，计算元素在容器空间中的大小，可以说：完美~~~（此处应有标志性动作)</p>
-<blockquote>
-<p>Flex布局背后的主要思想是给容器控制项目（Flex项目）的宽度、高度的能力，使用Flex项目可以自动填满容器的可用空间（主要是适应所有类型的显示设备和屏幕大小）。Flex容器使用Flex项目可以自动放大与收缩，用来填补可用的空闲空间。</p>
-</blockquote>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/23/flexbox/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-memory" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/21/javascript-memory/" class="article-date">
-      <time datetime="2017-02-21T07:05:51.000Z" itemprop="datePublished">2017-02-21</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/02/21/javascript-memory/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui purple ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/21/javascript-memory/">JavaScript的内存问题</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/02/21/javascript-memory/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <p>一直以来，对于Js的内存空间这部分的知识概念有些模糊，最近在回顾一些知识点的时候，特地的对js的内存这部分知识加深了一下理解，比如基本类型数据和引用类型数据在js内存中是怎么回事？什么是按值传递和按引用传递？以及对作用域和闭包的理解等等。</p>
-<h1>JavaScript的内存是怎样的？</h1>
-<p>JavaScript中有两种不同数据类型的值，一种是原始值，另外一种是引用类型值，原始值就是常说的基本数据类型值，包括String、Number、Boolean、Undefined和Null这五大基本数据类型，引用值指的是那些可能由多个指构成的对象，包括Object,Function,Array等类型的值。</p>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/21/javascript-memory/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-event-Loop" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/17/event-Loop/" class="article-date">
-      <time datetime="2017-02-17T07:08:42.000Z" itemprop="datePublished">2017-02-17</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/02/17/event-Loop/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui orange ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/17/event-Loop/">关于js事件循环的那点一知半解</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/02/17/event-Loop/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <h1>起源</h1>
-<p>最近在回顾一些知识点，也解惑了一些之前不懂的知识点，在这个过程中也饶有兴致的搞了一个个人博客，现在看来还不错，即可以总结记录一些知识点，又可以分享，虽然现在是给自己的看到哈哈哈~~~</p>
-<p>其中在网上看到了一道面试题，跟之前去某公司给的一道面试题一毛一样，涉及到的是长数组递归可能造成js的堆栈溢出，而后又从堆栈溢出引申了解到了JS的事件循环，总算是对此有了一知半解。</p>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/17/event-Loop/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-css-clearFloat" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/16/css-clearFloat/" class="article-date">
-      <time datetime="2017-02-16T06:19:03.000Z" itemprop="datePublished">2017-02-16</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/02/16/css-clearFloat/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui red ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/16/css-clearFloat/">CSS之清除浮动</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/02/16/css-clearFloat/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <p>面试的时候，关于清除浮动的问题经常会被考察，一开始对清除浮动了解不深，只知道css有个clear属性。在平时开发中也经常会用到float布局方式，之前因为了解不深，所以使用这种布局的时候经常出现问题。后面查找资料才发现原来清除浮动后面大有学问，了解清除浮动有利于我们对布局的开发，下面是对了解之后作出的一些总结，可能总结的不全面。</p>
-<p>在了解清除浮动之前，先看下什么是BFC。</p>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/16/css-clearFloat/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/02/15/hello-world/" class="article-date">
-      <time datetime="2017-02-15T10:05:22.000Z" itemprop="datePublished">2017-02-15</time>
-</a>
-
-
-    <a class="hint  hint--left" href="/2017/02/15/hello-world/#comments" data-hint="查看评论">
-        <i class="fa fa-comments-o" aria-hidden="true"></i>
-        <span class="count-comment"></span>
-        
-        
-    </a>
-
-
-
-
-    </div>
-  
-
-   <!-- 文章简介，即首页列表 -->
-
-  <!-- 首页标题背景色 -->
-	
-
-	
-
-  <div class="ui piled raised segment box-archive-item" itemscope="" itemtype="http://schema.org/Article" style="background-color:#fafafa !important">
-
-    
-
-	<div class="ui purple ribbon label" style="line-height: 1.3; min-width:100px; max-width:450px;"> <!-- 标题 -->
-		<span class="archive-item-title" style="display:block; height:100%; max-width:400px;white-space:nowrap; text-transform:capitalize;">
-			
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/15/hello-world/">我的第一个个人博客</a>
-    </h1>
-  
-
-		</span>
-	</div>
-  
-    <div onclick="window.open('/2017/02/15/hello-world/','_self')" id="id_description_div" style="margin-top:20px; line-height: 1.65em;cursor:pointer">
-        <p>最近一直有个想搞个个人博客玩玩的想法，今天在网上看到一个静态博客框架Hexo，于是看教程学着搭建了一个，现在看起来很成功，哈哈！开启我的博客之旅吧！</p>
-<div align="center"><img src="http://www.w3cplus.com/sites/default/files/blogs/2017/1702/understanding-flexbox-3.gif" alt="图文"></div>
-    </div>
-  
-
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-    </div>
-
-
-      
-        <p class="article-more-link">
-          <a href="/2017/02/15/hello-world/#more">
-				<span class="link link--yaku">
-					<span>发</span><span>现</span><span>更</span><span>多 >></span>
-				</span>
-		  </a>
-		  <!-- 发现更多 >> -->
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-
- 
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
 
 </div>
       <footer id="footer">
@@ -1515,10 +628,6 @@
     
 <script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.3.2/require.min.js" defer async="true" data-no-instant=""></script>
 
-
-    
-
-    
 
 
 
