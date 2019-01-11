@@ -1,7 +1,10 @@
 ---
 title: 深入理解Vue响应式原理
 date: 2018-02-07 22:44:06
-tags: Vue，源码阅读
+tags: 
+- Vue
+- JavaScript
+categories: 前端开发
 toc: true
 ---
 # 初步

@@ -2,6 +2,7 @@
 title: 作用域与闭包的一二事
 date: 2017-03-05 15:52:36
 tags: JavaScript
+categories: 前端开发
 toc: true
 ---
 

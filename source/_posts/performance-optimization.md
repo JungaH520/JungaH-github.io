@@ -1,7 +1,10 @@
 ---
 title: 前端性能优化总结
 date: 2018-03-14 21:35:47
-tags: 性能优化
+tags: 
+- JavaScript
+- 性能优化
+categories: 前端开发
 toc: true
 ---
 # 优化的原则和方向

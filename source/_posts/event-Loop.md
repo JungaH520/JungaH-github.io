@@ -2,6 +2,7 @@
 title: 关于js事件循环的那点一知半解
 date: 2017-02-17 15:08:42
 tags: JavaScript
+categories: 前端开发
 toc: true
 ---
 # 起源

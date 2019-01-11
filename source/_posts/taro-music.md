@@ -1,7 +1,10 @@
 ---
 title: 🔥基于taro + dva + typescript 开发的音乐播放器小程序
 date: 2019-01-11 14:35:51
-tags: 小程序，React
+tags: 
+- 小程序
+- React
+categories: 前端开发
 toc: true
 ---
 # 简介
