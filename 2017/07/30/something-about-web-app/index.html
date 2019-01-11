@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Junga&#39;s Blog">
 <meta property="og:description" content="前言 三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-11T14:29:43.985Z">
+<meta property="og:updated_time" content="2019-01-11T14:34:14.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于移动端开发中遇到的坑">
 <meta name="twitter:description" content="前言 三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就">
@@ -387,11 +387,11 @@
 <p>即当弹出层弹出时在html上添加.modal-open,禁用 html 和 body 的滚动条,但实际用上就会发现：</p>
 <ol>
 <li>由于 html 和 body的滚动条都被禁用，弹出层后页面的滚动位置会丢失，需要用 js 来计算原来滚动的位置，在弹出时保持滚动位置；</li>
-<li>杯具(＞﹏＜)的是页面的背景还是能够有滚的动的效果</li>
+<li>杯具的是页面的背景还是能够有滚的动的效果</li>
 </ol>
 <h2 id="js-之-touchmove-preventdefault"><a class="header-anchor" href="#js-之-touchmove-preventdefault"></a>js 之 touchmove + preventDefault</h2>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modal.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-<p>即通过阻止移动端touchmove事件，但实际用上会发现弹出层需要滚动时也会被阻止(＞﹏＜)</p>
+<p>即通过阻止移动端touchmove事件，但实际用上会发现弹出层需要滚动时也会被阻止</p>
 <h2 id="最后解决方案：position-fixed"><a class="header-anchor" href="#最后解决方案：position-fixed"></a>最后解决方案：position: fixed</h2>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span><span class="selector-class">.modal-open</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种方式同样当弹出层弹出时滚动条会丢失，所以还需要使用js来保存滚动条的位置，在关闭弹出层时将滚动位置还原；</p>
