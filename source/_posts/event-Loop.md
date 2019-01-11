@@ -16,7 +16,7 @@ toc: true
 
 > 如果 list 很大，下面的这段递归代码会造成堆栈溢出。如果在不改变递归模式的前提下修善这段代码:
 
-``` js
+```js
     var list = readHugeList();
 
     var nextListItem = function() {
@@ -33,7 +33,7 @@ toc: true
 
 > 上面那道题的答案是加一个setTimeout的定时器：
 
-``` js
+```js
     var list = readHugeList();
 
     var nextListItem = function() {
@@ -66,7 +66,7 @@ JavaScript语言的设计者意识到，这时主线程完全可以不管IO设�
 
 我们来看下面的代码：
 
-``` js
+```js
     console.log('a');
     setTimeout(function(){
         console.log('b');

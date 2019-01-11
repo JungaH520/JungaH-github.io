@@ -19,7 +19,7 @@ JavaScript中有两种不同数据类型的值，一种是原始值，另外一�
   <img src="http://upload-images.jianshu.io/upload_images/599584-cce8e155e19593fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存示意图">
 </div>
 
-``` js
+```js
     var a = 20;
     var b = 'abc';
     var c = true;
@@ -30,7 +30,7 @@ JavaScript中有两种不同数据类型的值，一种是原始值，另外一�
 
 接着我们来看下面的一段代码：
 
-``` js
+```js
     var a = {n:1};
     var b = a;
     a.x = a = {n:2};
@@ -43,21 +43,21 @@ JavaScript中有两种不同数据类型的值，一种是原始值，另外一�
 了解了Js的变量在内存的存储形式之后，我们一起来解释一下：
 1、a是一个引用类型的变量，一开始它在栈内存中的地址是指向堆内存的具体内容{n:1}，接着赋值给b，所以b和a一样，此时都指向对象{n:1}；
 
-``` js
+```js
   var a = {n:1} ;
   var b = {n:1} ;
 ```
 
 2、接下来a.x = a = {n:2},我们都知道js的赋值运算是从右往左的，但“.”是优先级最高的运算符，所以这段代码先执行了a.x,所以此时对象{n:1}新增加了一个x的属性，并且值是undefined，所以运行到这里a和b都指向了对象{n:1,x:undefined}；  
 
-``` js
+```js
   var a = {n:1，x:undefined} ;
   var b = {n:1，x:undefined} ;
 ``` 
 
 3、接着，依循“从右往左”的赋值运算顺序先执行 a={n:2} ，这时候，a指向的对象发生了改变，变成了新对象{n:2};而a.x = a则是对象{n:1，x:undefined}中的属性x指向了对象{n:2}，所以此时指向的对象变成了{n:1,x:{n:2}}。
 
-``` js
+```js
   var a = {n:2} ;
   var b = {n:1，x:{n:2}} ;
 ``` 
@@ -74,7 +74,7 @@ JavaScript的内存分配和回收是自动完成的，满足一定条件，就�
 2. 使用分配到的内存（读、写）
 3. 不需要时将其释放、归还
 
-``` js
+```js
   var num = 10;  // 在内存中给数值变量分配空间
   alert(num);  // 使用内存
   num = null; // 使用完毕之后，释放内存空间
@@ -93,7 +93,7 @@ js垃圾回收有两种常见的算法：引用计数和标记清除。
 
 > 但引用计数存在一个弊端就是循环引用问题（IE6和IE7就是采用此算法）。循环引用就是指对象A中包含一个指向对象B的引用，而对象B中也包含一个指向对象的引用。
 
-``` js
+```js
  function problem() {
     var A = {};
     var B = {};
@@ -119,7 +119,7 @@ js垃圾回收有两种常见的算法：引用计数和标记清除。
 
 可以分析以下代码：
 
-``` js
+```js
     function createPerson(name){
         var localPerson = new Object();
         localPerson.name = name;
@@ -139,7 +139,7 @@ js垃圾回收有两种常见的算法：引用计数和标记清除。
 
 ### 立即执行函数的运用
 
-``` js
+```js
   ;(function(window, $, undefined) {
       // 主业务代码
    })(window, jQuery);
@@ -149,7 +149,7 @@ js垃圾回收有两种常见的算法：引用计数和标记清除。
 
 ### 手动解除变量的引用
 
-``` js
+```js
   var obj = {a:1,b:2,c:3};
   obj = null;
 ```
@@ -158,7 +158,7 @@ js垃圾回收有两种常见的算法：引用计数和标记清除。
 
 除了使用闭包进行内部变量访问，回调函数也有这个功能。
 
-``` js
+```js
   function getData(callback) {
     var data = 'Junga';
     callback(data);

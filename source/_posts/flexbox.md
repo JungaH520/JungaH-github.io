@@ -61,7 +61,7 @@ flexbox布局意为弹性布局，是css3的弹性盒子模式，用它可以告
 
 display定义了一个Flex容器，为其内容建立新的伸缩格式化上下文。其中flex是块伸缩容器，inline-flex是内联伸缩容器。
 
-``` css
+```css
   .container{
       display: flex;/* or inline-flex*/
   }
@@ -73,7 +73,7 @@ display定义了一个Flex容器，为其内容建立新的伸缩格式化上下
 
 flex-direction定义了flex容器里面的flex项目的排列方向，水平排列和竖直排列
 
-``` css
+```css
   .container { 
     flex-direction: row | row-reverse | column | column-reverse; 
   }
@@ -88,7 +88,7 @@ flex-direction定义了flex容器里面的flex项目的排列方向，水平排�
 
 flex-wrap定义了当一行或者一列排不上，flex项目是否换行，默认是不换行。
 
-``` css
+```css
   .container {
     flex-wrap: nowrap | wrap | wrap-reverse;
   }
@@ -114,7 +114,7 @@ flex-wrap定义了当一行或者一列排不上，flex项目是否换行，默�
 
  justify-content定义了flex项目在flex容器主轴中的对齐方式。
 
- ``` css
+ ```css
   container{
     justify-content: {flex-start | flex-end | center | space-between | space-around;
   }
@@ -134,7 +134,7 @@ flex-wrap定义了当一行或者一列排不上，flex项目是否换行，默�
 
 align-items定义了flex项目在flex容器竖轴上的对齐方式。类似justify-content属性，只不过是方向不同。
 
- ``` css
+ ```css
   container{
     align-items: {flex-start | flex-end | center | baseline | stretch;
   }
@@ -154,7 +154,7 @@ align-items定义了flex项目在flex容器竖轴上的对齐方式。类似just
 
 align-content属性定义了多根轴线的对齐方式。当伸缩容器的侧轴还有多余空间时，align-content属性可以用来调准伸缩行在伸缩容器里的对齐方式，这与调准伸缩项目在主轴上对齐方式的justify-content属性类似。
 
-``` css
+```css
   container{
     align-items: {flex-start | flex-end | center | baseline | stretch;
   }
@@ -177,7 +177,7 @@ align-content属性定义了多根轴线的对齐方式。当伸缩容器的侧�
 
 order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
 
- ``` css
+ ```css
   .item {
     order: <integer>;
   }
@@ -189,7 +189,7 @@ order属性定义项目的排列顺序。数值越小，排列越靠前，默认
 
  flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。flex-grow取负值将失效。
 
- ``` css
+ ```css
   .item {
     flex-grow: <number>; /* default 0 */
   }
@@ -205,7 +205,7 @@ order属性定义项目的排列顺序。数值越小，排列越靠前，默认
 
 flex-shrink属性则与flex-grow属性相反，定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。与flex-grow一样，flex-shrink取负值将失效。
 
-``` css
+```css
   .item {
     flex-shrink: <number>; /* default 1 */
   }
@@ -217,7 +217,7 @@ flex-basis属性定义了Flex项目在分配Flex容器剩余空间之前的一�
 
 > 注意：如果flex-basis属性的值是0时，也需要使用单位。即flex-basis: 0px不能写成flex-basis:0。
 
-``` css
+```css
  .item {
    flex-basis: <length> | auto; /* default auto */ 
   }
@@ -228,7 +228,7 @@ flex-basis属性定义了Flex项目在分配Flex容器剩余空间之前的一�
 flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。  
 > 注意：flex-grow第一，然后是flex-shrink，最后是flex-basis。缩写成GSB。
 
-``` css
+```css
  .item { 
    flex: 0 1 auto;/*flex-grow: 0; flex-shrink: 1; flex-basis: auto;*/
  }
@@ -250,7 +250,7 @@ flex常见值:
 
 align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
 
-``` css
+```css
   .item { 
     align-self: auto | flex-start | flex-end | center | baseline | stretch; 
   }

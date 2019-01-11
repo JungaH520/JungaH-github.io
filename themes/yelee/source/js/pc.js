@@ -96,10 +96,10 @@ define([], function() {
         $(".QQ").bind("click", function() { //qq扫码
             //var idx = $(this).index();
             if ($("#my_qq").length <= 0) {
-                $("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+                $("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px; width:100%' />");
                 $("#my_qq").bind("click", function() { //qq扫码
                   if ($("#my_wechat").length <= 0) {
-                      $("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+                      $("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px; width:100%' />");
                       $("#my_wechat").bind("click", function() { //微信扫码
                           slide(5);
                           Tips.hide();
@@ -116,10 +116,10 @@ define([], function() {
         $(".WeChat").bind("click", function() { //微信扫码
             //var idx = $(this).index();
             if ($("#my_wechat").length <= 0) {
-                $("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px;' />");
+                $("#wechat_div").append("<img id='my_wechat' src='/img/wechat.png' style='cursor:pointer; margin-left:12px; width:100%' />");
                 $("#my_wechat").bind("click", function() { //微信扫码
                   if ($("#my_qq").length <= 0) {
-                      $("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px;' />");
+                      $("#qq_div").append("<img id='my_qq' src='/img/qq.png' style='cursor:pointer; margin-top:-8px; width:100%' />");
                       $("#my_qq").bind("click", function() { //qq扫码
                           slide(6);
                           Tips.hide();

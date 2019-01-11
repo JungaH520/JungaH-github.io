@@ -6,9 +6,7 @@ toc: true
 ---
 最近一直有个想搞个个人博客玩玩的想法，今天在网上看到一个静态博客框架Hexo，于是看教程学着搭建了一个，现在看起来很成功，哈哈！开启我的博客之旅吧！
 
-<div align="center">
-    <img src="http://www.w3cplus.com/sites/default/files/blogs/2017/1702/understanding-flexbox-3.gif" alt="图文">
-<div>
+<div align="center"><img src="http://www.w3cplus.com/sites/default/files/blogs/2017/1702/understanding-flexbox-3.gif" alt="图文"></div>
 
 <!-- more -->
 
@@ -90,19 +88,19 @@ $ hexo d
 一些常用的命令：
 
 ``` bash
-    hexo new "postName" #新建文章
+hexo new "postName" #新建文章
 
-    hexo new page "pageName" #新建页面
+hexo new page "pageName" #新建页面
 
-    hexo generate #生成静态页面至public目录
+hexo generate #生成静态页面至public目录
 
-    hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
+hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
 
-    hexo deploy #将.deploy目录部署到GitHub
+hexo deploy #将.deploy目录部署到GitHub
 
-    hexo help # 查看帮助
+hexo help # 查看帮助
 
-    hexo version #查看Hexo的版本
+hexo version #查看Hexo的版本
 ``` 
 
 至此，你可以打开你的个人博客路径username.github.io，就可以看到你的博客了。

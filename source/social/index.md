@@ -9,6 +9,7 @@ toc: false
     width: 100%;
 }
 .img_list img {
+    width: 100%;
     margin: 10px auto
 }
 </style>

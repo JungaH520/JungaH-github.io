@@ -46,19 +46,19 @@ toc: true
  >先将src赋值成一个通用的预览图，下拉时候再动态赋值成正式的图片。如下，preview.png是预览图片，比较小，加载很快，而且很多图片都共用这个preview.png，加载一次即可。待页面下拉，图片显示出来时，再去替换src为data-src的值。（data-开头的属性浏览器渲染的时候会忽略掉，提高渲染性能）
 
 ```js
-    <img src="preview.png" data-src="realImg.png"/>
+<img src="preview.png" data-src="realImg.png"/>
 ```
 
 3、减少DOM 查询，对 DOM 查询做缓存
 
 ```js
-    // 只查询一个 DOM ，缓存在 pList 中了
-    var pList = document.getElementsByTagName('p')  
-    for (var i = 0; i < pList.length; i++) {
-    }
-    // 每次循环，都会查询 DOM ，耗费性能
-    for (var i = 0; i < document.getElementsByTagName('p').length; i++) {
-    }
+// 只查询一个 DOM ，缓存在 pList 中了
+var pList = document.getElementsByTagName('p')  
+for (var i = 0; i < pList.length; i++) {
+}
+// 每次循环，都会查询 DOM ，耗费性能
+for (var i = 0; i < document.getElementsByTagName('p').length; i++) {
+}
 ```
 
 4、减少DOM 操作，多个操作尽量合并在一起执行（DocumentFragment）
@@ -66,16 +66,16 @@ toc: true
 >DOM 操作是非常耗费性能的，因此插入多个标签时，先插入 Fragment 然后再统一插入 DOM。因为Fragment文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时不会引起页面回流。
 
 ```js
-    var listNode = document.getElementById('list')
-    // 要插入 10 个 li 标签
-    var frag = document.createDocumentFragment();
-    var i, li;
-    for(i = 0; i < 10; i++) {
-        li = document.createElement("li");
-        li.innerHTML = "List item " + i;
-        frag.appendChild(li);  //先放在 frag 中，最后一次性插入到 DOM 结构中。
-    }
-    listNode.appendChild(frag);
+var listNode = document.getElementById('list')
+// 要插入 10 个 li 标签
+var frag = document.createDocumentFragment();
+var i, li;
+for(i = 0; i < 10; i++) {
+    li = document.createElement("li");
+    li.innerHTML = "List item " + i;
+    frag.appendChild(li);  //先放在 frag 中，最后一次性插入到 DOM 结构中。
+}
+listNode.appendChild(frag);
 ```
 
 5、事件节流
@@ -84,72 +84,72 @@ toc: true
 >1、 防抖（debounce）：在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
 
 ```js
-    function debounce(fn, delay) {
-        // 定时器，用来 setTimeout
-        var timer
-        // 返回一个函数，这个函数会在一个时间区间结束后的 delay 毫秒时执行 fn 函数
-        return function () {
-            // 保存函数调用时的上下文和参数，传递给 fn
-            var context = this
-            var args = arguments
-            // 每次这个返回的函数被调用，就清除定时器，以保证不执行 fn
-            timer && clearTimeout(timer)
-            // 当返回的函数被最后一次调用后（也就是用户停止了某个连续的操作），
-            // 再过 delay 毫秒就执行 fn
-            timer = setTimeout(function () {
-                fn.apply(context, args)
-            }, delay)
-        }
+function debounce(fn, delay) {
+    // 定时器，用来 setTimeout
+    var timer
+    // 返回一个函数，这个函数会在一个时间区间结束后的 delay 毫秒时执行 fn 函数
+    return function () {
+        // 保存函数调用时的上下文和参数，传递给 fn
+        var context = this
+        var args = arguments
+        // 每次这个返回的函数被调用，就清除定时器，以保证不执行 fn
+        timer && clearTimeout(timer)
+        // 当返回的函数被最后一次调用后（也就是用户停止了某个连续的操作），
+        // 再过 delay 毫秒就执行 fn
+        timer = setTimeout(function () {
+            fn.apply(context, args)
+        }, delay)
     }
+}
 ```
 
 >2、节流（throttle）：规定一个单位时间，在这个单位时间内，只能有一次触发事件的回调函数执行，如果在同一个单位时间内某事件被触发多次，只有一次能生效。
 
 ```js
-    function throttle(fn, threshhold) {
-        // 记录上次执行的时间
-        var last
-        // 定时器
-        var timer
-        // 默认间隔为 250ms
-        threshhold || (threshhold = 250)
-        // 返回的函数，每过 threshhold 毫秒就执行一次 fn 函数
-        return function () {
-            // 保存函数调用时的上下文和参数，传递给 fn
-            var context = this
-            var args = arguments
+function throttle(fn, threshhold) {
+    // 记录上次执行的时间
+    var last
+    // 定时器
+    var timer
+    // 默认间隔为 250ms
+    threshhold || (threshhold = 250)
+    // 返回的函数，每过 threshhold 毫秒就执行一次 fn 函数
+    return function () {
+        // 保存函数调用时的上下文和参数，传递给 fn
+        var context = this
+        var args = arguments
 
-            var now = +new Date()
-            // 如果距离上次执行 fn 函数的时间小于 threshhold，那么就放弃
-            // 执行 fn，并重新计时
-            if (last && now < last + threshhold) {
-                timer && clearTimeout(timer)
-                // 保证在当前时间区间结束后，再执行一次 fn
-                timer = setTimeout(function () {
-                    last = now
-                    fn.apply(context, args)
-                }, threshhold)
-            // 在时间区间的最开始和到达指定间隔的时候执行一次 fn
-            } else {
+        var now = +new Date()
+        // 如果距离上次执行 fn 函数的时间小于 threshhold，那么就放弃
+        // 执行 fn，并重新计时
+        if (last && now < last + threshhold) {
+            timer && clearTimeout(timer)
+            // 保证在当前时间区间结束后，再执行一次 fn
+            timer = setTimeout(function () {
                 last = now
                 fn.apply(context, args)
-            }
+            }, threshhold)
+        // 在时间区间的最开始和到达指定间隔的时候执行一次 fn
+        } else {
+            last = now
+            fn.apply(context, args)
         }
     }
+}
 ```
 
 6、尽早执行操作（DOMContentLoaded）
 
 ```js
-    window.addEventListener('load', function () {
-        // 页面的全部资源加载完才会执行，包括图片、视频等
-    })
-    document.addEventListener('DOMContentLoaded', function () {
-        // DOM 渲染完即可执行，此时图片、视频还可能没有加载完
-    })
-    $(document).ready({function () {
-        // 同DOMContentLoaded
-    })
+window.addEventListener('load', function () {
+    // 页面的全部资源加载完才会执行，包括图片、视频等
+})
+document.addEventListener('DOMContentLoaded', function () {
+    // DOM 渲染完即可执行，此时图片、视频还可能没有加载完
+})
+$(document).ready({function () {
+    // 同DOMContentLoaded
+})
 ```
 
 7、使用 **预渲染** 或者 **SSR后端渲染**，数据直接输出到 HTML 中，减少浏览器使用 JS 模板渲染页面 HTML 的时间 (如Vue SSR)，同时也有利于网站的SEO。
