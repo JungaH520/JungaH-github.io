@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://huangzhuangjia.github.io/about/index.html</loc>
+    
+    <lastmod>2019-01-11T14:09:29.724Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://huangzhuangjia.github.io/tags/index.html</loc>
+    
+    <lastmod>2019-01-11T13:59:45.304Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://huangzhuangjia.github.io/2019/01/11/taro-music/</loc>
     
     <lastmod>2019-01-11T09:55:56.313Z</lastmod>
@@ -68,20 +82,6 @@
     <loc>https://huangzhuangjia.github.io/2017/02/15/hello-world/</loc>
     
     <lastmod>2019-01-11T06:28:44.672Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/about/index.html</loc>
-    
-    <lastmod>2019-01-11T06:22:32.546Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/tags/index.html</loc>
-    
-    <lastmod>2019-01-11T03:51:42.592Z</lastmod>
     
   </url>
   
