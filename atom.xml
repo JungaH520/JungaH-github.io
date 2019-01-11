@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Junga&#39;s blog</title>
+  <title>Junga&#39;s Blog</title>
   <icon>https://www.gravatar.com/avatar/662a2e5877ea920dd2ace92b7b842a98</icon>
-  <subtitle>Coding Change My Life🤓</subtitle>
+  <subtitle>Stay Hungry Stay Foolish🤓</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://huangzhuangjia.github.io/"/>
