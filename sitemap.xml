@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/</loc>
+    
+    <lastmod>2019-01-11T14:24:01.511Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://huangzhuangjia.github.io/about/index.html</loc>
     
     <lastmod>2019-01-11T14:14:53.998Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://huangzhuangjia.github.io/2018/03/14/performance-optimization/</loc>
     
     <lastmod>2019-01-11T09:34:16.992Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/</loc>
-    
-    <lastmod>2019-01-11T09:32:31.584Z</lastmod>
     
   </url>
   
