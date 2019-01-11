@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cn.vuejs.org/images/data.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/huangzhuangjia/Vue-learn/master/doc/img/vue-reactive.jpg">
-<meta property="og:updated_time" content="2019-01-11T06:37:27.671Z">
+<meta property="og:updated_time" content="2019-01-11T09:13:13.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Vue响应式原理">
 <meta name="twitter:description" content="初步 最近一段时间在阅读Vue源码，从它的核心原理入手，开始了源码的学习，而其核心原理就是其数据的响应式，讲到Vue的响应式原理，我们可以从它的兼容性说起，Vue不支持IE8以下版本的浏览器，因为Vue是基于 Object.defineProperty 来实现数据响应的，而 Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是为什么 Vue 不支持 IE8">
@@ -329,7 +329,7 @@
 <a id="more"></a>
 <p><img src="https://cn.vuejs.org/images/data.png" alt="vue响应式"></p>
 <p>我们这里是根据Vue2.3源码进行分析,Vue数据响应式变化主要涉及 <strong>Observer</strong>, <strong>Watcher</strong> , <strong>Dep</strong> 这三个主要的类；因此要弄清Vue响应式变化需要明白这个三个类之间是如何运作联系的；以及它们的原理，负责的逻辑操作。那么我们从一个简单的Vue实例的代码来分析Vue的响应式原理</p>
-<pre><code class="language-js">var vue = new Vue({
+<pre><code class="language-javascript">var vue = new Vue({
     el: &quot;#app&quot;,
     data: {
         name: 'Junga'

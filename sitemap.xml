@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://huangzhuangjia.github.io/2018/02/07/About-responsive-of-Vue/</loc>
+    
+    <lastmod>2019-01-11T09:13:13.637Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://huangzhuangjia.github.io/social/index.html</loc>
     
     <lastmod>2019-01-11T07:00:36.323Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://huangzhuangjia.github.io/2019/01/11/taro-music/</loc>
     
     <lastmod>2019-01-11T06:47:15.867Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2018/02/07/About-responsive-of-Vue/</loc>
-    
-    <lastmod>2019-01-11T06:37:27.671Z</lastmod>
     
   </url>
   
