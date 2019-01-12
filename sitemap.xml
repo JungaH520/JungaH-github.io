@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/</loc>
+    
+    <lastmod>2019-01-12T10:14:01.067Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://huangzhuangjia.github.io/categories/index.html</loc>
     
     <lastmod>2019-01-11T14:55:32.321Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://huangzhuangjia.github.io/2019/01/11/taro-music/</loc>
     
     <lastmod>2019-01-11T14:54:35.485Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://huangzhuangjia.github.io/2017/07/30/something-about-web-app/</loc>
-    
-    <lastmod>2019-01-11T14:54:11.830Z</lastmod>
     
   </url>
   

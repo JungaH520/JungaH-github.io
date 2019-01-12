@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Junga&#39;s Blog">
 <meta property="og:description" content="前言 三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-11T14:54:11.830Z">
+<meta property="og:updated_time" content="2019-01-12T10:14:01.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于移动端开发中遇到的坑">
 <meta name="twitter:description" content="前言 三月中旬跳完槽之后就好好久没写博客了，跳到某公司之后，怀揣着满腔热水的我又投入了工作中，从面试、办理离职到入职只用了一个星期。这效率也没谁了，入职之后给了一个小项目，用Vue全家桶开发一个简易的个人博客。因为之前自学了解过，于是很快就上手，原本要求用两周的时间用了三天就完成了全部的功能，于是就一周之后就开始安排到项目组进行实际的开发中了，最后被安排到招聘组负责校招的前端开发。一去就">
@@ -423,7 +423,7 @@
 <p>由于所开发的页面内嵌在公司的一个APP中，有一个类似聊天窗口的界面，测试的时候发现在部分安卓机中输入框被完全遮挡住，踩这个坑时在网上找了好多资料，好像都没有一套完整的解决办法，先看其中一种解决办法，可以解决绝大数安卓机上面的问题：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="regexp">/Android/</span>.test(navigator.appVersion)) &#123;</span><br><span class="line">   <span class="built_in">window</span>.addEventListener(<span class="string">"resize"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(<span class="built_in">document</span>.activeElement.tagName==<span class="string">"INPUT"</span> || <span class="built_in">document</span>.activeElement.tagName==<span class="string">"TEXTAREA"</span>) &#123;</span><br><span class="line">       <span class="built_in">document</span>.activeElement.scrollIntoView();</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>即在安卓机中通过监听当窗口resize时，判断当前获得焦点的元素是否为输入框，再调用该元素的scrollIntoView()，即将该元素展示在当前窗口的可视区域。由于只有scrollIntoView被各浏览器均支持，所以这个方法最为常用。<br>
-使用这段代码之后，在微信或者其他浏览器测试时有效果，但因为是需要内嵌在自家APP上，使用这段代码一直没有解决输入框被挡住的问题，最后测试才发现，APP内置浏览器在聚焦输入框弹出键盘根本没有触发窗口的resize事件，瞬间心中万马奔腾(＞﹏＜)~~~，后面在借鉴了某阿里的一个网页版的聊天界面，发现它是通过获取输入框焦点将输入框定位到窗口略高于输入框的位置，在失去焦点键盘弹回时再恢复到底部，于是通过这种方式处理，暂时比较暴力的解决了在安卓上该APP上输入框被挡住的问题，这种方法显然是不完美的，比如由于无法监听resize事件，而且使用的键盘高度不固定，所以只能大概的将高度设置保持在屏幕一半偏上一点。保证绝大数情况下输入框在键盘之上显示。</p>
+使用这段代码之后，在微信或者其他浏览器测试时有效果，但因为是需要内嵌在自家APP上，使用这段代码一直没有解决输入框被挡住的问题，最后测试才发现，APP内置浏览器在聚焦输入框弹出键盘根本没有触发窗口的resize事件，瞬间心中万马奔腾~~~，后面在借鉴了某阿里的一个网页版的聊天界面，发现它是通过获取输入框焦点将输入框定位到窗口略高于输入框的位置，在失去焦点键盘弹回时再恢复到底部，于是通过这种方式处理，暂时比较暴力的解决了在安卓上该APP上输入框被挡住的问题，这种方法显然是不完美的，比如由于无法监听resize事件，而且使用的键盘高度不固定，所以只能大概的将高度设置保持在屏幕一半偏上一点。保证绝大数情况下输入框在键盘之上显示。</p>
 <h1>IOS滚动不平滑的问题</h1>
 <p>在移动端特别是iOS中，当滚动屏幕时会发现手指一拿开滚动就停止，这种用户体验效果很不好，有种给用户滚动卡顿的感觉。CSS3中的-webkit-overflow-scrolling属性可以完美的解决这个问题，该属性可控制元素在移动设备上是否使用滚动回弹效果:</p>
 <ol>
