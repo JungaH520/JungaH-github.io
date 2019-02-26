@@ -362,7 +362,7 @@ han: false
 
 # Disqus
 disqus:
-  enable: true
+  enable: false
   shortname: jungahuang
   count: true
 
@@ -397,7 +397,7 @@ valine:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+livere_uid: MTAyMC80MjExMC8xODY1Nw==
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
