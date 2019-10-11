@@ -323,7 +323,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/11/about-vue3-proxy/" itemprop="url">about-vue3-proxy</a></h1>
+                <a class="post-title-link" href="/2019/10/11/about-vue3-proxy/" itemprop="url">浅析Vue3数据响应系统</a></h1>
         
 
         <div class="post-meta">
@@ -396,12 +396,8 @@
 
       
         
-          <h1>浅析Vue3数据响应系统</h1>
-<p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，当时就心想又有东西要学了，还能不能好好让我们放个假😨，目前的版本还是 <em>Pre-Alpha</em>，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
-<p>源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经给出了Vue <a href="https://vue-composition-api-rfc.netlify.com/#basic-example" target="_blank" rel="noopener">Composition API RFC</a>，可以初步了解Vue3的一些写法和特性，这两天花了些时间大概看了下数据响应部分(<a href="https://juejin.im/post/5d99d9a0f265da5b8601264c" target="_blank" rel="noopener">网上已经有大佬给出了调试技巧</a>)</p>
-<p>熟悉Vue2.x的童鞋应该知道，其数据响应是基于 <em>ES5</em> 的API <em>Object.defineProperty</em> 来操作属性的 <em>getter/setter</em> 实现的，本身API存在一些不足：比如对于数组，不能通过数组下标来观测其变化，也不能观测数组长度length的变化，为此对数组7个原生方法做了拦截处理实现对数组的观测。对于对象，由于defineProperty的局限性，Vue2不能检测对象属性的添加或删除。</p>
-<p>为了优化解决这些不足，更好的实现方式是通过 <em>ES6</em> 提供的 <em>Proxy</em> 对象。</p>
-<p>Vue3就是基于 <em>Proxy</em> 对其数据响应系统进行了重写，现在这部分可以作为独立的模块配合其他框架使用。数据响应可分为三个阶段：<strong>初始化阶段 --&gt; 依赖收集阶段 --&gt; 数据响应阶段</strong></p>
+          <p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 <em>Pre-Alpha</em>，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
+<p>源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经给出了 <a href="https://vue-composition-api-rfc.netlify.com/#basic-example" target="_blank" rel="noopener">Vue Composition API RFC</a>，可以初步了解Vue3的一些写法和特性，这两天花了些时间大概看了下数据响应部分（<a href="https://juejin.im/post/5d99d9a0f265da5b8601264c" target="_blank" rel="noopener">网上已经有大佬给出了调试技巧</a>）</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/10/11/about-vue3-proxy/#more" rel="contents">
