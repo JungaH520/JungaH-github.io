@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,Vue,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="浅析Vue3数据响应系统 国庆长假还没结束，尤大大就把Vue3源码给放了出来，当时就心想又有东西要学了，还能不能好好让我们放个假😨，目前的版本还是 Pre-Alpha，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的">
+<meta name="keywords" content="JavaScript,Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about-vue3-proxy">
+<meta property="og:url" content="https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/index.html">
+<meta property="og:site_name" content="Junga&#39;s Blog">
+<meta property="og:description" content="浅析Vue3数据响应系统 国庆长假还没结束，尤大大就把Vue3源码给放了出来，当时就心想又有东西要学了，还能不能好好让我们放个假😨，目前的版本还是 Pre-Alpha，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-11T12:18:06.104Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about-vue3-proxy">
+<meta name="twitter:description" content="浅析Vue3数据响应系统 国庆长假还没结束，尤大大就把Vue3源码给放了出来，当时就心想又有东西要学了，还能不能好好让我们放个假😨，目前的版本还是 Pre-Alpha，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/">
+
+
+
+
+
+  <title>about-vue3-proxy | Junga's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+	<script type="text/javascript" src="/js/src/love.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/huangzhuangjia" title="Fork me on Github" target="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Junga's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay Hungry Stay Foolish🤓</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JungaH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Junga's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">about-vue3-proxy</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-11T20:08:23+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>浅析Vue3数据响应系统</h1>
+<p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，当时就心想又有东西要学了，还能不能好好让我们放个假😨，目前的版本还是 <em>Pre-Alpha</em>，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
+<p>源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经给出了Vue <a href="https://vue-composition-api-rfc.netlify.com/#basic-example" target="_blank" rel="noopener">Composition API RFC</a>，可以初步了解Vue3的一些写法和特性，这两天花了些时间大概看了下数据响应部分(<a href="https://juejin.im/post/5d99d9a0f265da5b8601264c" target="_blank" rel="noopener">网上已经有大佬给出了调试技巧</a>)</p>
+<p>熟悉Vue2.x的童鞋应该知道，其数据响应是基于 <em>ES5</em> 的API <em>Object.defineProperty</em> 来操作属性的 <em>getter/setter</em> 实现的，本身API存在一些不足：比如对于数组，不能通过数组下标来观测其变化，也不能观测数组长度length的变化，为此对数组7个原生方法做了拦截处理实现对数组的观测。对于对象，由于defineProperty的局限性，Vue2不能检测对象属性的添加或删除。</p>
+<p>为了优化解决这些不足，更好的实现方式是通过 <em>ES6</em> 提供的 <em>Proxy</em> 对象。</p>
+<p>Vue3就是基于 <em>Proxy</em> 对其数据响应系统进行了重写，现在这部分可以作为独立的模块配合其他框架使用。数据响应可分为三个阶段：<strong>初始化阶段 --&gt; 依赖收集阶段 --&gt; 数据响应阶段</strong></p>
+<a id="more"></a>
+<h2 id="proxy代理须知"><a class="header-anchor" href="#proxy代理须知"></a>Proxy代理须知</h2>
+<p>用<em>Proxy</em> 做代理时，我们需要了解几个问题：</p>
+<p>1、<em>Proxy</em> 代理是如何对其 <em>trap</em> 进行处理来实现数据响应的？也就是其 <em>get/set</em> 里面是如何做拦截处理（其实这里的trap默认行为可以通过 <em>Reflect</em> 来返回，<em>Reflect</em> 对象的方法与 <em>Proxy</em> 对象的方法一一对应，只要是 <em>Proxy</em> 对象的方法，就能在 <em>Reflect</em> 对象上找到对应的方法。这就让 <em>Proxy</em> 对象可以方便地调用对应的 <em>Reflect</em> 方法，完成默认行为，作为修改行为的基础。这里具体可以查看阮大神的<a href="http://es6.ruanyifeng.com/?search=iteration&amp;x=0&amp;y=0#docs/reflect" target="_blank" rel="noopener">ES6入门</a>）</p>
+<p>2、<em>Proxy</em> 代理的对象只能代理到第一层，当代理的对象多层嵌套时，那么对象内部的深度监测需要如何去实现？</p>
+<p>3、当代理对象是数组时，比如push操作会触发多次<em>get/set</em>，因为push操作除了增加数组的数据项之外，也会引发数组本身其他相关属性的改变，因此会多次触发 <em>get/set</em> ，那么要如何解决呢？</p>
+<p>下面我们会稍微分析下Vue3针对这几个问题做了哪些优化处理。</p>
+<h2 id="初始化阶段"><a class="header-anchor" href="#初始化阶段"></a>初始化阶段</h2>
+<p>初始化过程相对比较简单，通过 <em>reactive()</em> 方法将数据转化成 <em>Proxy</em> 对象，这里注意一个比较重要的对象 <em>targetMap</em>，它在依赖收集阶段起着比较重要的作用，具体下面会有分析。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">reactive</span>(<span class="params">target: object</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// if trying to observe a readonly proxy, return the readonly version.</span></span><br><span class="line">  <span class="keyword">if</span> (readonlyToRaw.has(target)) &#123;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// target is explicitly marked as readonly by user</span></span><br><span class="line">  <span class="keyword">if</span> (readonlyValues.has(target)) &#123;</span><br><span class="line">    <span class="keyword">return</span> readonly(target)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> createReactiveObject(</span><br><span class="line">    target,</span><br><span class="line">    rawToReactive,</span><br><span class="line">    reactiveToRaw,</span><br><span class="line">    mutableHandlers,</span><br><span class="line">    mutableCollectionHandlers</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建proxy对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createReactiveObject</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  target: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  toProxy: WeakMap&lt;any, any&gt;,</span></span></span><br><span class="line"><span class="function"><span class="params">  toRaw: WeakMap&lt;any, any&gt;,</span></span></span><br><span class="line"><span class="function"><span class="params">  baseHandlers: ProxyHandler&lt;any&gt;,</span></span></span><br><span class="line"><span class="function"><span class="params">  collectionHandlers: ProxyHandler&lt;any&gt;</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isObject(target)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (__DEV__) &#123;</span><br><span class="line">      <span class="built_in">console</span>.warn(<span class="string">`value cannot be made reactive: <span class="subst">$&#123;<span class="built_in">String</span>(target)&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// target already has corresponding Proxy</span></span><br><span class="line">  <span class="keyword">let</span> observed = toProxy.get(target)</span><br><span class="line">  <span class="keyword">if</span> (observed !== <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> observed</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// target is already a Proxy</span></span><br><span class="line">  <span class="keyword">if</span> (toRaw.has(target)) &#123;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// only a whitelist of value types can be observed.</span></span><br><span class="line">  <span class="keyword">if</span> (!canObserve(target)) &#123;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> handlers = collectionTypes.has(target.constructor)</span><br><span class="line">    ? collectionHandlers</span><br><span class="line">    : baseHandlers</span><br><span class="line">  observed = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handlers)</span><br><span class="line">  toProxy.set(target, observed)</span><br><span class="line">  toRaw.set(observed, target)</span><br><span class="line">  <span class="keyword">if</span> (!targetMap.has(target)) &#123;</span><br><span class="line">    targetMap.set(target, <span class="keyword">new</span> <span class="built_in">Map</span>())</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Vue3如何进行深度观测的？先看下面这段代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123; <span class="attr">x</span>: &#123;<span class="attr">y</span>: &#123;<span class="attr">z</span>: <span class="number">1</span> &#125; &#125; &#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">  get(target, key, receiver) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="built_in">Reflect</span>.get(target, key, receiver)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'get value:'</span>, key)</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;,</span><br><span class="line">  set(target, key, value, receiver) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'set value:'</span>, key, value)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(target, key, value, receiver)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">p.x.y = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// get value: x</span></span><br><span class="line"><span class="comment">// &#123;y: 2&#125;</span></span><br></pre></td></tr></table></figure>
+<p>上面代码我们可以知道 <em>Proxy</em> 只会代理一层，因为这里只是触发了一次最外层属性 <em>x</em> 的 <em>get</em>，而重新赋值的其内部属性 <em>y</em>，此时 <em>set</em> 并没有被触发，所以改变内部属性是不会监测到的。继续看，Reflect.get返回的结果正是 <em>target</em> 的内层结构，此时p.x.y的值也已经变成2了，我们可以判断当前 <em>Reflect.get</em> 返回的值是否为object，若是则再通过 <em>reactive</em> 做代理，这样就达到了深度观测的目的了。</p>
+<p>Vue3实现过程具体我们可以看下面源码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createGetter</span>(<span class="params">isReadonly: boolean</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">target: any, key: string | symbol, receiver: any</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="built_in">Reflect</span>.get(target, key, receiver)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> key === <span class="string">'symbol'</span> &amp;&amp; builtInSymbols.has(key)) &#123;</span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isRef(res)) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.value</span><br><span class="line">    &#125;</span><br><span class="line">    track(target, OperationTypes.GET, key)</span><br><span class="line">    <span class="comment">// 当代理的对象是多层结构时，Reflect.get会返回对象的内层结构，我们可以拿到当前res再做判断是否为object，进而进行reactive，就达到了深度观测的目的了</span></span><br><span class="line">    <span class="keyword">return</span> isObject(res)</span><br><span class="line">      ? isReadonly</span><br><span class="line">        ? <span class="comment">// need to lazy access readonly and reactive here to avoid</span></span><br><span class="line">          <span class="comment">// circular dependency</span></span><br><span class="line">          readonly(res)</span><br><span class="line">        : reactive(res)</span><br><span class="line">      : res</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="依赖收集阶段"><a class="header-anchor" href="#依赖收集阶段"></a>依赖收集阶段</h2>
+<p>所谓的依赖在Vue3可简单理解为各种 <em>effect</em> 响应式函数，其中包括了属性依赖的<em>effect</em>，计算属性 <em>computedEffect</em> 以及组件视图的 <em>componentEffect</em></p>
+<p>1、在视图挂载渲染时会执行一个componentEffect，触发相关数据属性getter操作来完成视图依赖收集。</p>
+<p>2、effect函数执行也会触发相关属性的getter操作，此时操作了某个属性的effect也会被该属性对应进行收集（注意这里的属性是可观测的）。</p>
+<p>之所以说是响应式的，是因为effect方法回调中关联了被观测的数据属性，而effect一般是立即执行的，此时触发了该属性的 <em>getter</em>，进行依赖收集，当该属性触发<em>setter</em> 时，便会触发执行收集的依赖。另外，这里每次effect执行时，当前的effect会被压入一个名为”activeReactiveEffectStack“的栈中，是在依赖收集的时候使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">effect</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  fn: Function,</span></span></span><br><span class="line"><span class="function"><span class="params">  options: ReactiveEffectOptions = EMPTY_OBJ</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): <span class="title">ReactiveEffect</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> ((fn <span class="keyword">as</span> ReactiveEffect).isEffect) &#123;</span><br><span class="line">    fn = (fn <span class="keyword">as</span> ReactiveEffect).raw</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> effect = createReactiveEffect(fn, options)</span><br><span class="line">  <span class="keyword">if</span> (!options.lazy) &#123;</span><br><span class="line">    <span class="comment">// effect立即执行，触发effect回调函数fn中相关响应数据属性的getter操作，从而进行依赖收集</span></span><br><span class="line">    effect()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> effect</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 触发getter操作，进行依赖收集</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">track</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  target: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  type: OperationTypes,</span></span></span><br><span class="line"><span class="function"><span class="params">  key?: string | symbol</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!shouldTrack) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> effect = activeReactiveEffectStack[activeReactiveEffectStack.length - <span class="number">1</span>]</span><br><span class="line">  <span class="keyword">if</span> (effect) &#123;</span><br><span class="line">    <span class="keyword">if</span> (type === OperationTypes.ITERATE) &#123;</span><br><span class="line">      key = ITERATE_KEY</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> depsMap = targetMap.get(target)</span><br><span class="line">    <span class="keyword">if</span> (depsMap === <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">      targetMap.set(target, (depsMap = <span class="keyword">new</span> <span class="built_in">Map</span>()))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> dep = depsMap.get(key!)</span><br><span class="line">    <span class="keyword">if</span> (dep === <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">      depsMap.set(key!, (dep = <span class="keyword">new</span> <span class="built_in">Set</span>()))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止依赖重复收集</span></span><br><span class="line">    <span class="keyword">if</span> (!dep.has(effect)) &#123;</span><br><span class="line">      dep.add(effect)</span><br><span class="line">      effect.deps.push(dep)</span><br><span class="line">      <span class="keyword">if</span> (__DEV__ &amp;&amp; effect.onTrack) &#123;</span><br><span class="line">        effect.onTrack(&#123;</span><br><span class="line">          effect,</span><br><span class="line">          target,</span><br><span class="line">          type,</span><br><span class="line">          key</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开头说过 <em>targetMap</em> 对象在依赖收集过程中的重要作用，看源码我们大概知道了，它维护了一个依赖收集的关系表，<em>targetMap</em> 是一个 <em>WeakMap</em>，其 <em>key</em> 值是当前被代理的对象 <em>target</em>，而 <em>value</em> 则是该对象所对应的 <em>depsMap</em>，它是一个 <em>Map</em>，<em>key</em> 值为触发 <em>getter</em> 时的属性值，而 <em>value</em> 值则是触发过该属性值所对应的各个 <em>effect</em>。</p>
+<p>故 <em>targetMap</em> 的关系映射可以看成 <em>target --&gt; key --&gt; effect</em>，可以看出 <em>target</em> 被观测后，其属性 <em>key</em> 在被触发 <em>getter</em> 操作时，收集了所依赖的 <em>effect</em>，可以说 <em>targetMap</em> 是Vue3进行依赖收集的一个核心对象。</p>
+<h2 id="响应阶段"><a class="header-anchor" href="#响应阶段"></a>响应阶段</h2>
+<p>当触发属性 <em>setter</em> 时，通过 <em>trigger</em> 函数会执行属性对应收集的 <em>effects</em>，也包括 <em>computedEffects</em>，此时通过 <em>scheduleRun</em> 逐个调用 <em>effect</em>，最后完成视图更新。</p>
+<p>上面我们讲过监测数组的时候可能触发多次 <em>get/set</em>, 那么如何防止触发多次的呢？先看Vue3的源码(简写省略了部分代码)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// setter操作触发响应</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  target: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  key: string | symbol,</span></span></span><br><span class="line"><span class="function"><span class="params">  value: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  receiver: any</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): <span class="title">boolean</span> </span>&#123;</span><br><span class="line">  value = toRaw(value)</span><br><span class="line">  <span class="comment">// 判断key是否为当前target自身属性</span></span><br><span class="line">  <span class="keyword">const</span> hadKey = hasOwn(target, key)</span><br><span class="line">  <span class="comment">// 获取旧值</span></span><br><span class="line">  <span class="keyword">const</span> oldValue = target[key]</span><br><span class="line">  <span class="keyword">if</span> (isRef(oldValue) &amp;&amp; !isRef(value)) &#123;</span><br><span class="line">    oldValue.value = value</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="built_in">Reflect</span>.set(target, key, value, receiver)</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (!hadKey) &#123;</span><br><span class="line">    <span class="comment">// 若属性不存在标记为add操作</span></span><br><span class="line">    trigger(target, OperationTypes.ADD, key)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (value !== oldValue) &#123;</span><br><span class="line">    <span class="comment">// 若值不相等在触发，并且标记为set操作</span></span><br><span class="line">    trigger(target, OperationTypes.SET, key)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">trigger</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  target: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  type: OperationTypes,</span></span></span><br><span class="line"><span class="function"><span class="params">  key?: string | symbol,</span></span></span><br><span class="line"><span class="function"><span class="params">  extraInfo?: any</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> depsMap = targetMap.get(target)</span><br><span class="line">  <span class="keyword">if</span> (depsMap === <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// never been tracked</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> effects = <span class="keyword">new</span> <span class="built_in">Set</span>&lt;ReactiveEffect&gt;()</span><br><span class="line">  <span class="keyword">const</span> computedRunners = <span class="keyword">new</span> <span class="built_in">Set</span>&lt;ReactiveEffect&gt;()</span><br><span class="line">  <span class="comment">// 这里遍历找出相关依赖的effect</span></span><br><span class="line">  <span class="keyword">if</span> (type === OperationTypes.CLEAR) &#123;</span><br><span class="line">    <span class="comment">// collection being cleared, trigger all effects for target</span></span><br><span class="line">    depsMap.forEach(<span class="function"><span class="params">dep</span> =&gt;</span> &#123;</span><br><span class="line">      addRunners(effects, computedRunners, dep)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// schedule runs for SET | ADD | DELETE</span></span><br><span class="line">    <span class="keyword">if</span> (key !== <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">      addRunners(effects, computedRunners, depsMap.get(key))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// also run for iteration key on ADD | DELETE</span></span><br><span class="line">    <span class="keyword">if</span> (type === OperationTypes.ADD || type === OperationTypes.DELETE) &#123;</span><br><span class="line">      <span class="comment">// 这里当改变数组length长度时也会触发相关effect进行响应</span></span><br><span class="line">      <span class="keyword">const</span> iterationKey = <span class="built_in">Array</span>.isArray(target) ? <span class="string">'length'</span> : ITERATE_KEY</span><br><span class="line">      addRunners(effects, computedRunners, depsMap.get(iterationKey))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历执行依赖的effect</span></span><br><span class="line">  <span class="keyword">const</span> run = <span class="function">(<span class="params">effect: ReactiveEffect</span>) =&gt;</span> &#123;</span><br><span class="line">    scheduleRun(effect, target, type, key, extraInfo)</span><br><span class="line">  &#125;</span><br><span class="line">  computedRunners.forEach(run)</span><br><span class="line">  effects.forEach(run)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scheduleRun</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  effect: ReactiveEffect,</span></span></span><br><span class="line"><span class="function"><span class="params">  target: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  type: OperationTypes,</span></span></span><br><span class="line"><span class="function"><span class="params">  key: string | symbol | undefined,</span></span></span><br><span class="line"><span class="function"><span class="params">  extraInfo: any</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (effect.scheduler !== <span class="keyword">void</span> <span class="number">0</span>) &#123;</span><br><span class="line">    effect.scheduler(effect)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    effect()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由源码我们可以分析出：1、判断key是否为当前被代理对象target自身属性;  2、判断旧值与新值是否相等。只有这两个条件其中一个满足，才有可能执行 <em>trigger</em>。</p>
+<p>怎么理解呢，我们举个🌰，可以实现一个小的 <em>reactive</em> 方法来做数据代理，代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasOwn</span>(<span class="params">val, key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> hasOwnProperty = <span class="built_in">Object</span>.prototype.hasOwnProperty</span><br><span class="line">  <span class="keyword">return</span> hasOwnProperty.call(val, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reactive</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> observed = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">    get(target, key, receiver) &#123;</span><br><span class="line">      <span class="keyword">const</span> res = <span class="built_in">Reflect</span>.get(target, key, receiver)</span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    &#125;,</span><br><span class="line">    set(target, key, value, receiver) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(target, key, value)</span><br><span class="line">      <span class="keyword">const</span> hadKey = hasOwn(target, key)</span><br><span class="line">      <span class="keyword">const</span> oldValue = target[key]</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> result = <span class="built_in">Reflect</span>.set(target, key, value, receiver)</span><br><span class="line">      <span class="keyword">if</span> (!hadKey) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'trigger add operation...'</span>)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(value !== oldValue) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'trigger set operation...'</span>)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = [<span class="string">'a'</span>, <span class="string">'b'</span>]</span><br><span class="line"><span class="keyword">let</span> state = reactive(data)</span><br><span class="line">state.push(<span class="string">'c'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["a", "b"] "2" "c"</span></span><br><span class="line"><span class="comment">// trigger add operation...</span></span><br><span class="line"><span class="comment">// ["a", "b", "c"] "length" 3</span></span><br></pre></td></tr></table></figure>
+<p><em>state.push(‘c’)</em> 会触发两次 <em>set</em> ，一次是push的值 <em>c</em> ，一次是 <em>length</em> 属性设置。<br>
+1、设置值 <em>c</em> 时，新增了索引 <em>key</em> 为 2，<em>target</em> 是原始的代理对象 <em>[‘a’, ‘c’]</em> ，这是一个 <em>add</em> 操作, 故 <em>hasOwn(target, key)</em> 返回的是false，此时执行 <em>trigger add operation…</em> 。注意在Vue源码trigger方法中，length没有对应的effect，所以就没有执行相关的effect<br>
+2、当传入 <em>key</em> 为 <em>length</em> 时，<em>length</em> 是自身属性，故 <em>hasOwn(target, key)</em> 返回 <em>true</em>, 此时 <em>value</em> 是 3, 而 <em>oldValue</em> 即为 target[‘length’] 也是 3，故value !== oldValue不成立，不执行trigger方法<br>
+故只有当 <em>hasOwn(target, key)</em> 返回true或者 <em>value !== oldValue</em> 的时候才执行 <em>trigger</em></p>
+<h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
+<p>在分析源码之前我们先列举了用Proxy做代理实现数据响应需要解决的几个问题，并带着这些问题一步一步揭开Vue在数据响应系统处理这些问题的面纱，也让我们进一步了解了Vue源码编写有许多巧妙的地方，比如利用 <em>Reflect.get</em> 返回值为 <em>target</em> 当前触发的第一层属性 <em>key</em> 值对应的 <em>value</em> 值，从而再来判断是否为Object来进行深度观测，并且观测的值存放在一个WeakMap下，这样相比较递归Proxy，Vue的这种实现方式大大提高了数据响应的性能。</p>
+<p>这两天就大致的阅读了这部分源码，有些细节地方还没去深入理解，存在不足或者错误的地方还请各位大佬指出，大家一起学习交流哈。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/WechatPay.jpeg" alt="JungaH 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="JungaH 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    JungaH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/" title="about-vue3-proxy">https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/03/about-mobile-develop/" rel="next" title="移动端开发问题小记">
+                <i class="fa fa-chevron-left"></i> 移动端开发问题小记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjExMC8xODY1Nw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="JungaH">
+            
+              <p class="site-author-name" itemprop="name">JungaH</p>
+              <p class="site-description motion-element" itemprop="description">Stay Hungry Stay Foolish🤓</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/huangzhuangjia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1364475214@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/586f5f14128fe100580d6e17" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-globe"></i>掘金</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">浅析Vue3数据响应系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#proxy代理须知"><span class="nav-number">1.1.</span> <span class="nav-text">Proxy代理须知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化阶段"><span class="nav-number">1.2.</span> <span class="nav-text">初始化阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖收集阶段"><span class="nav-number">1.3.</span> <span class="nav-text">依赖收集阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应阶段"><span class="nav-number">1.4.</span> <span class="nav-text">响应阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JungaH</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
