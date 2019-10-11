@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经">
+<meta name="description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没">
 <meta name="keywords" content="JavaScript,Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析Vue3数据响应系统">
 <meta property="og:url" content="https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/index.html">
 <meta property="og:site_name" content="Junga&#39;s Blog">
-<meta property="og:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经">
+<meta property="og:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-11T12:24:19.205Z">
+<meta property="og:updated_time" content="2019-10-11T12:47:12.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析Vue3数据响应系统">
-<meta name="twitter:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经">
+<meta name="twitter:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没">
 
 
 
@@ -398,14 +398,14 @@
       
 
       
-        <p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 <em>Pre-Alpha</em>，正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
+        <p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 <em>Pre-Alpha</em>，源码地址：<a href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener">Vue-next</a>， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
 <p>源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经给出了 <a href="https://vue-composition-api-rfc.netlify.com/#basic-example" target="_blank" rel="noopener">Vue Composition API RFC</a>，可以初步了解Vue3的一些写法和特性，这两天花了些时间大概看了下数据响应部分（<a href="https://juejin.im/post/5d99d9a0f265da5b8601264c" target="_blank" rel="noopener">网上已经有大佬给出了调试技巧</a>）</p>
 <a id="more"></a>
 <p>熟悉Vue2.x的童鞋应该知道，其数据响应是基于 <em>ES5</em> 的API <em>Object.defineProperty</em> 来操作属性的 <em>getter/setter</em> 实现的，本身API存在一些不足：比如对于数组，不能通过数组下标来观测其变化，也不能观测数组长度length的变化，为此对数组7个原生方法做了拦截处理实现对数组的观测。对于对象，由于defineProperty的局限性，Vue2不能检测对象属性的添加或删除。</p>
 <p>为了优化解决这些不足，更好的实现方式是通过 <em>ES6</em> 提供的 <em>Proxy</em> 对象。</p>
 <p>Vue3就是基于 <em>Proxy</em> 对其数据响应系统进行了重写，现在这部分可以作为独立的模块配合其他框架使用。数据响应可分为三个阶段：<strong>初始化阶段 --&gt; 依赖收集阶段 --&gt; 数据响应阶段</strong></p>
 <h2 id="proxy代理须知"><a class="header-anchor" href="#proxy代理须知"></a>Proxy代理须知</h2>
-<p>用<em>Proxy</em> 做代理时，我们需要了解几个问题：</p>
+<p>用 <em>Proxy</em> 做代理时，我们需要了解几个问题：</p>
 <p>1、<em>Proxy</em> 代理是如何对其 <em>trap</em> 进行处理来实现数据响应的？也就是其 <em>get/set</em> 里面是如何做拦截处理（其实这里的trap默认行为可以通过 <em>Reflect</em> 来返回，<em>Reflect</em> 对象的方法与 <em>Proxy</em> 对象的方法一一对应，只要是 <em>Proxy</em> 对象的方法，就能在 <em>Reflect</em> 对象上找到对应的方法。这就让 <em>Proxy</em> 对象可以方便地调用对应的 <em>Reflect</em> 方法，完成默认行为，作为修改行为的基础。这里具体可以查看阮大神的<a href="http://es6.ruanyifeng.com/?search=iteration&amp;x=0&amp;y=0#docs/reflect" target="_blank" rel="noopener">ES6入门</a>）</p>
 <p>2、<em>Proxy</em> 代理的对象只能代理到第一层，当代理的对象多层嵌套时，那么对象内部的深度监测需要如何去实现？</p>
 <p>3、当代理对象是数组时，比如push操作会触发多次<em>get/set</em>，因为push操作除了增加数组的数据项之外，也会引发数组本身其他相关属性的改变，因此会多次触发 <em>get/set</em> ，那么要如何解决呢？</p>
