@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没">
+<meta name="description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，只是大概完成了核心的功能，还不太完整，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码">
 <meta name="keywords" content="JavaScript,Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析Vue3数据响应系统">
 <meta property="og:url" content="https://huangzhuangjia.github.io/2019/10/11/about-vue3-proxy/index.html">
 <meta property="og:site_name" content="Junga&#39;s Blog">
-<meta property="og:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没">
+<meta property="og:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，只是大概完成了核心的功能，还不太完整，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-11T13:57:39.589Z">
+<meta property="og:updated_time" content="2019-10-15T04:02:14.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析Vue3数据响应系统">
-<meta name="twitter:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没">
+<meta name="twitter:description" content="国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 Pre-Alpha，只是大概完成了核心的功能，还不太完整，源码地址：Vue-next， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂 源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码">
 
 
 
@@ -398,17 +398,18 @@
       
 
       
-        <p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 <code>Pre-Alpha</code>，源码地址：<a href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener">Vue-next</a>， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
-<p>源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官网也已经给出了 <a href="https://vue-composition-api-rfc.netlify.com/#basic-example" target="_blank" rel="noopener">Vue Composition API RFC</a>，可以初步了解Vue3的一些写法和特性，这两天花了些时间大概看了下数据响应部分（<a href="https://juejin.im/post/5d99d9a0f265da5b8601264c" target="_blank" rel="noopener">网上已经有大佬给出了调试技巧</a>）</p>
+        <p>国庆长假还没结束，尤大大就把Vue3源码给放了出来，还能不能好好让人好好放个假😨，目前的版本还是 <code>Pre-Alpha</code>，只是大概完成了核心的功能，还不太完整，源码地址：<a href="https://github.com/vuejs/vue-next" target="_blank" rel="noopener">Vue-next</a>， 而正式版本可能要明年才发布了，于是放假回来，便第一时间clone了源码，生啃了起来，还别说，真香~~~😂</p>
+<p>源码整体结构还是比较清晰，相比较于Vue2.x做了比较大的调整，代码话说98%都是用ts编写，所以看源码还需要大概了解ts的一些知识。而在还没发布Vue3源码之前，官方也已经给出了 <a href="https://vue-composition-api-rfc.netlify.com/#basic-example" target="_blank" rel="noopener">Vue Composition API RFC</a>，可以初步了解Vue3的一些写法和特性，这两天花了些时间大概看了下数据响应部分（<a href="https://juejin.im/post/5d99d9a0f265da5b8601264c" target="_blank" rel="noopener">网上已经有大佬给出了调试技巧</a>）</p>
 <a id="more"></a>
-<p>熟悉Vue2.x的童鞋应该知道，其数据响应是基于 <code>ES5</code> 的API <code>Object.defineProperty</code> 来操作属性的 <code>getter/setter</code> 实现的，本身API存在一些不足：比如对于数组，不能通过数组下标来观测其变化，也不能观测数组长度length的变化，为此对数组7个原生方法做了拦截处理实现对数组的观测。对于对象，由于defineProperty的局限性，Vue2不能检测对象属性的添加或删除。</p>
+<p>熟悉 <code>Vue2.x</code> 的童鞋应该知道，其数据响应是基于 <code>ES5</code> 的API <code>Object.defineProperty</code> 来操作属性的 <code>getter/setter</code> 实现的，本身API存在一些不足：比如对于数组，不能通过数组下标来观测其变化，也不能观测数组长度length的变化，为此对数组7个原生方法做了拦截处理实现对数组的观测。对于对象，由于defineProperty的局限性，<code>Vue2.x</code> 不能检测对象属性的添加或删除。</p>
 <p>为了优化解决这些不足，更好的实现方式是通过 <code>ES6</code> 提供的 <code>Proxy</code> 对象。</p>
-<p>Vue3 就是基于 <code>Proxy</code> 对其数据响应系统进行了重写，现在这部分可以作为独立的模块配合其他框架使用。数据响应可分为三个阶段：<strong>初始化阶段 --&gt; 依赖收集阶段 --&gt; 数据响应阶段</strong></p>
+<p><code>Vue3</code> 就是基于 <code>Proxy</code> 对其数据响应系统进行了重写，现在这部分可以作为独立的模块配合其他框架使用。数据响应可分为三个阶段：<strong>初始化阶段 --&gt; 依赖收集阶段 --&gt; 数据响应阶段</strong></p>
 <h2 id="proxy代理须知"><a class="header-anchor" href="#proxy代理须知"></a>Proxy代理须知</h2>
 <p>用 <code>Proxy</code> 做代理时，我们需要了解几个问题：</p>
 <p>1、<code>Proxy</code> 代理是如何对其 <code>trap</code> 进行处理来实现数据响应的？也就是其 <code>get/set</code> 里面是如何做拦截处理（其实这里的trap默认行为可以通过 <code>Reflect</code> 来返回，<code>Reflect</code> 对象的方法与 <code>Proxy</code> 对象的方法一一对应，只要是 <code>Proxy</code> 对象的方法，就能在 <code>Reflect</code> 对象上找到对应的方法。这就让 <code>Proxy</code> 对象可以方便地调用对应的 <code>Reflect</code> 方法，完成默认行为，作为修改行为的基础。这里具体可以查看阮大神的<a href="http://es6.ruanyifeng.com/?search=iteration&amp;x=0&amp;y=0#docs/reflect" target="_blank" rel="noopener">ES6入门</a>）</p>
 <p>2、<code>Proxy</code> 代理的对象只能代理到第一层，当代理的对象多层嵌套时，那么对象内部的深度监测需要如何去实现？</p>
 <p>3、当代理对象是数组时，比如push操作会触发多次 <code>get/set</code>，因为push操作除了增加数组的数据项之外，也会引发数组本身其他相关属性的改变，因此会多次触发 <code>get/set</code> ，那么要如何解决呢？</p>
+<p>4、<code>Proxy</code> 不能对基本类型数据进行代理，那Vue3是通过什么实现基本类型数据的响应的？在Vue3中，通ts自定义了一种特殊类型的数据<code>Ref</code>，对于此类型的理解需要有一定的ts基础，而基本类型数据就是通过它的转化变成了可响应式，具体如何实现后面我们再来分析，这里先不做解释了。</p>
 <p>下面我们会稍微分析下 Vue3 针对这几个问题做了哪些优化处理。</p>
 <h2 id="初始化阶段"><a class="header-anchor" href="#初始化阶段"></a>初始化阶段</h2>
 <p>初始化过程相对比较简单，通过 <code>reactive()</code> 方法将数据转化成 <code>Proxy</code> 对象，这里注意一个比较重要的对象 <code>targetMap</code>，它在依赖收集阶段起着比较重要的作用，具体下面会有分析。</p>
@@ -434,12 +435,12 @@
 <p>怎么理解呢，我们举个🌰，可以实现一个小的 <code>reactive</code> 方法来做数据代理，代码如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasOwn</span>(<span class="params">val, key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> hasOwnProperty = <span class="built_in">Object</span>.prototype.hasOwnProperty</span><br><span class="line">  <span class="keyword">return</span> hasOwnProperty.call(val, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reactive</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> observed = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data, &#123;</span><br><span class="line">    get(target, key, receiver) &#123;</span><br><span class="line">      <span class="keyword">const</span> res = <span class="built_in">Reflect</span>.get(target, key, receiver)</span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    &#125;,</span><br><span class="line">    set(target, key, value, receiver) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(target, key, value)</span><br><span class="line">      <span class="keyword">const</span> hadKey = hasOwn(target, key)</span><br><span class="line">      <span class="keyword">const</span> oldValue = target[key]</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> result = <span class="built_in">Reflect</span>.set(target, key, value, receiver)</span><br><span class="line">      <span class="keyword">if</span> (!hadKey) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'trigger add operation...'</span>)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span>(value !== oldValue) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'trigger set operation...'</span>)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> observed</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> data = [<span class="string">'a'</span>, <span class="string">'b'</span>]</span><br><span class="line"><span class="keyword">let</span> state = reactive(data)</span><br><span class="line">state.push(<span class="string">'c'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["a", "b"] "2" "c"</span></span><br><span class="line"><span class="comment">// trigger add operation...</span></span><br><span class="line"><span class="comment">// ["a", "b", "c"] "length" 3</span></span><br></pre></td></tr></table></figure>
 <p><code>state.push(‘c’)</code> 会触发两次 <code>set</code> ，一次是push的值 <code>c</code> ，一次是 <code>length</code> 属性设置。<br>
-1、设置值 <code>c</code> 时，新增了索引 <code>key</code> 为 2，*target 是原始的代理对象 <code>[‘a’, ‘c’]</code> ，这是一个 <code>add</code> 操作, 故 <code>hasOwn(target, key)</code> 返回的是false，此时执行 <code>trigger add operation…</code> 。注意在 <code>trigger</code> 方法中，<code>length</code> 没有对应的 <code>effect</code>，所以就没有执行相关的 <code>effect</code>。<br>
+1、设置值 <code>c</code> 时，新增了索引 <code>key</code> 为 2，<code>target</code> 是原始的代理对象 <code>[‘a’, ‘c’]</code> ，这是一个 <code>add</code> 操作, 故 <code>hasOwn(target, key)</code> 返回的是false，此时执行 <code>trigger add operation…</code> 。注意在 <code>trigger</code> 方法中，<code>length</code> 没有对应的 <code>effect</code>，所以就没有执行相关的 <code>effect</code>。<br>
 2、当传入 <code>key</code> 为 <code>length</code> 时，<code>length</code> 是自身属性，故 <code>hasOwn(target, key)</code> 返回 <code>true</code>, 此时 <code>value</code> 是 3, 而 <code>oldValue</code> 即为 <code>target[‘length’]</code> 也是 3，故 <code>value !== oldValue</code> 不成立，不执行 <code>trigger</code> 方法<br>
 故只有当 <code>hasOwn(target, key)</code> 返回true或者 <code>value !== oldValue</code> 的时候才执行 <code>trigger</code>。</p>
 <h2 id="总结"><a class="header-anchor" href="#总结"></a>总结</h2>
-<p>在分析源码之前我们先列举了用Proxy做代理实现数据响应需要解决的几个问题，并带着这些问题一步一步揭开Vue在数据响应系统处理这些问题的面纱，也让我们进一步了解了Vue源码编写有许多巧妙的地方，比如利用 <code>Reflect.get</code> 返回值为 <code>target</code> 当前触发的第一层属性 <code>key</code> 值对应的 <code>value</code> 值，从而再来判断是否为Object来进行深度观测，并且观测的值存放在一个WeakMap下，这样相比较递归Proxy，Vue的这种实现方式大大提高了数据响应的性能。</p>
-<p>这两天就大致的阅读了这部分源码，有些细节地方还没去深入理解，存在不足或者错误的地方还请各位多指教，大家一起学习交流哈。</p>
+<p>在分析源码之前我们先列举了用Proxy做代理实现数据响应需要解决的几个问题，并带着这些问题一步一步揭开Vue在数据响应系统处理这些问题的面纱，也让我们进一步了解了Vue源码编写有许多巧妙的地方，比如利用 <code>Reflect.get</code> 返回值为 <code>target</code> 当前触发的第一层属性 <code>key</code> 值对应的 <code>value</code> 值，从而再来判断是否为Object来进行深度观测，并且观测的值存放在一个<code>WeakMap</code>下，这样相比较递归Proxy，Vue的这种实现方式大大提高了数据响应的性能。<br>
+这两天就大致的阅读了这部分源码，有些细节地方还没去深入理解，存在不足或者错误的地方请指出，大家一起学习交流。</p>
 
       
     </div>
